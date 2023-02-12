@@ -1,0 +1,6 @@
+section:
+  name: Blogs
+  id: recent-posts
+  enable: True
+  weight: 4
+  showOnNavbar: True

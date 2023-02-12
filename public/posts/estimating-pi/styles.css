@@ -1,0 +1,10 @@
+#canvas {
+    display: block;
+    margin:auto;
+    text-align: center;
+}
+
+img {
+    padding-top: 1cm;
+    padding-bottom: 1cm;
+}

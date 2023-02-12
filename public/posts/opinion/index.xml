@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opinion on Ahmad Hamze Homepage</title>
+    <link>http://AhmadHamze.github.io/posts/opinion/</link>
+    <description>Recent content in Opinion on Ahmad Hamze Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://AhmadHamze.github.io/posts/opinion/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lessons Learned From My First Web Dev Job</title>
+      <link>http://AhmadHamze.github.io/posts/opinion/first-react-job/</link>
+      <pubDate>Thu, 27 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/opinion/first-react-job/</guid>
+      <description>Recently I started a web development job as a front-end developer, here are a few things I learned so far.
+1. Make sure to have the correct working environment As you might know, preparing the development environment is an essential step when you start a new project. In my case, the team decided to use Nix for package management (it&amp;rsquo;s awesome). The first problem I faced is that I am using Windows, and to be able to use nix on Windows you have to use WSL.</description>
+    </item>
+    
+    <item>
+      <title>Advice to my past self</title>
+      <link>http://AhmadHamze.github.io/posts/opinion/advice-to-myself/</link>
+      <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/opinion/advice-to-myself/</guid>
+      <description>Advice to my past self regarding programming In this blog, I talk about a few things that I wish somebody told me back when I started learning to program by myself, I hope you can benefit from this if you&amp;rsquo;re also new to programming.
+1. Talk to real programmers who know what they&amp;rsquo;re doing Getting into the world of programming is quite easy, all you have to do is own a laptop, watch YouTube videos and try to build programs yourself.</description>
+    </item>
+    
+  </channel>
+</rss>

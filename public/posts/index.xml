@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Ahmad Hamze Homepage</title>
+    <link>http://AhmadHamze.github.io/posts/</link>
+    <description>Recent content in Posts on Ahmad Hamze Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://AhmadHamze.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mapping Earthquakes Locations on a Map</title>
+      <link>http://AhmadHamze.github.io/posts/earthquakes/</link>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/earthquakes/</guid>
+      <description>Introduction This is a data visualization program made using processing.py, I made it a few years ago, however, I think it&amp;rsquo;s a great program that deserves recognition.
+You can find the code and the data used here.
+Data The program uses a csv file containing 2000 locations of earthquakes (longitude and latitude), the magnitude of the earthquakes, and the name of the place where they occurred (a string). Here is the source of the data</description>
+    </item>
+    
+    <item>
+      <title>A live pictionary using websockets</title>
+      <link>http://AhmadHamze.github.io/posts/pictionary/</link>
+      <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/pictionary/</guid>
+      <description>Introduction This is a project that uses websockets to create a drawing on a page and copy this drawing to another page instantly.
+If you&amp;rsquo;ve never heard of websockets before, here&amp;rsquo;s the main idea:
+  You send data from your browser to a server using a &amp;ldquo;socket&amp;rdquo; which is a real-time connection that can send data back and forth.
+  There is another computer that is connected to the server and will receive the data from it also using a socket.</description>
+    </item>
+    
+    <item>
+      <title>My first C&#43;&#43; console application</title>
+      <link>http://AhmadHamze.github.io/posts/c&#43;&#43;-matrix/</link>
+      <pubDate>Thu, 29 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/c&#43;&#43;-matrix/</guid>
+      <description>Matrix calculator for two by two and three by three real matrices This is a project that I did around three years ago, just after I finished taking my very first comprehensive programming course, it was about the C++ language.
+Back then I knew that there are many better options to do matrix calculation, mostly using the Python Numpy library. I also knew that there are many C++ libraries that provide matrix calculation, most notably Eigen.</description>
+    </item>
+    
+    <item>
+      <title>Estimating pi</title>
+      <link>http://AhmadHamze.github.io/posts/estimating-pi/</link>
+      <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/estimating-pi/</guid>
+      <description>Using the Monte-Carlo simulation to estimate the value of &amp;#x03C0;First of all, let&#39;s talk briefly about what is a Monte-Carlo simulation.
+Simply put, it is a computational method that uses a large number of random samples to obtain a result. It is used in awide range of disciplines like mathematics, computer graphics, and physical sciences.In this blog, we will see how we can use this method to estimate the value of the mathematical constant \( \pi \).</description>
+    </item>
+    
+  </channel>
+</rss>

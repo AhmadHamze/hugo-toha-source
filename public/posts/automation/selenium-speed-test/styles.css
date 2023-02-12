@@ -1,0 +1,24 @@
+img {
+  padding-top: 1cm;
+  padding-bottom: 1cm;
+}
+
+.highlight {
+  color: #e83e8c;
+}
+
+#videoContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#conclusionContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#conclusion {
+  font-size: 1.5rem;
+}

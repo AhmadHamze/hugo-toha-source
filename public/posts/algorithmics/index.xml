@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithmics on Ahmad Hamze Homepage</title>
+    <link>http://AhmadHamze.github.io/posts/algorithmics/</link>
+    <description>Recent content in Algorithmics on Ahmad Hamze Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://AhmadHamze.github.io/posts/algorithmics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enhancing Recursion with Memoization</title>
+      <link>http://AhmadHamze.github.io/posts/algorithmics/memoization/</link>
+      <pubDate>Sun, 17 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://AhmadHamze.github.io/posts/algorithmics/memoization/</guid>
+      <description>In this blog, we will go over an example of recursion and how we can use something called memoization to increase the speed of the code.
+The Fibonacci Sequence If you&amp;rsquo;ve never heard of it, it&amp;rsquo;s quite simple, just start with two numbers 0 and 1, and add them together to get the next number in the sequence (yeah, that&amp;rsquo;ll be 1 once again).
+Now add the new number with the one just before it to obtain the next number, so 1 + 1 and that is 2.</description>
+    </item>
+    
+  </channel>
+</rss>

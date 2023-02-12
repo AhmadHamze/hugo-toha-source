@@ -1,0 +1,36 @@
+section:
+  name: Skills
+  id: Skills
+  enable: True
+  weight: 2
+  showOnNavbar: True
+
+skills:
+- name: Python Development
+  # All images need to be added to themes/toha/assets/images else you get an error!
+  logo: "/images/pythonicon.png"
+  summary: "Capable of using the Python language for different uses including data science and web development (Flask and Django)."
+
+- name: React Development
+  logo: "/images/react-logo.jpg"
+  summary: "Experienced in React development, I mostly use Typescript"
+
+- name: Git
+  logo: "/images/Git-Icon.png"
+  summary: "Experienced in Git development, mostly use Github."
+
+- name: Jupyter Notebook
+  logo: "/images/jupyter-logo-300.png"
+  summary: "Experienced in Jupyter notebook, used it for data science, data visualization and scientific programming."
+
+- name: Google Colaboratory
+  logo: "/images/colab_favicon_256px.png"
+  summary: "Capable of using Google Colab including accessing files directly from Google Drive."
+
+- name: SQL
+  logo: "/images/SQL.png"
+  summary: "Capable of using different SQL servers including SQLite, PostgreSQL and SQL Server Management Studio SSMS."
+
+- name: C++ Development
+  logo: "/images/C++_Logo.svg.png"
+  summary: "knowledgeable in both C and C++, capable of writing basic programs in both languages."

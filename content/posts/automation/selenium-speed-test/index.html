@@ -1,0 +1,220 @@
+---
+title: "Selenium Speed Test"
+date: 2021-10-28
+description: Selenium code to automate the 10fastfingers typing test
+menu:
+  sidebar:
+    name: Selenium Speed Test
+    identifier: Selenium-Speed-Test
+    parent: Automation-Programs
+    weight: 10
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <p class="disclaimer">
+      This blog is for learning purposes only, you can find the complete code on
+      my
+      <a href="https://github.com/AhmadHamze/selenium-typingspeed">Github</a>
+      go there to find the instructions necessary to run the code.
+    </p>
+    <h2>Background</h2>
+    <p>
+      The first time I ever used Selenium, I had to type a string into a search
+      bar. Doing so, I couldn't see if a string was typed at all, to the point
+      where I thought maybe it doesn't actually type words. I thought something
+      else was going on.<br />
+      I am also kind of addicted to typing speed websites, I spend much more
+      time than I should on different sites where you're supposed to type some
+      words and see how many words you can type within a certain amount of time
+      (10fastfingers is such a website
+      <a href="https://10fastfingers.com">https://10fastfingers.com</a>). The
+      unit used to measure typing speed is words per minute, abbreviated as
+      WPM.<br />
+      Looking at the high scores, it seems that the top typing speed is a bit
+      above 200 WPM. For someone like me who can score a 60 WPM on a good day,
+      this is extraordinary, but it seems that actual human beings are capable
+      of reaching such speed.<br />
+      This is when I had the idea to do this small project, I want to see how
+      fast can Selenium score on 10fastfingers.
+    </p>
+    <h2>Code</h2>
+    <div>
+      <p>
+        In this section, I will briefly go over the code to explain how the
+        project works.<br />
+        Let's start by launching Selenium, the latest version requires the use
+        of a "Service".
+      </p>
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              serv = Service(PATH)
+              driver = webdriver.Chrome(service=serv)
+              driver.get("https://10fastfingers.com/typing-test/english")
+          </code>
+      </pre>
+
+      <p>This will launch a browser to the simple English test</p>
+      <img src="./media/beginning.png" alt="10fastfingers begin test" />
+      <p>
+        The first thing we want to do is to inspect the box containing the
+        words, we need to grab all the words to be able to make Selenium enter
+        each one of them in the input box.
+      </p>
+      <img src="./media/box-inspect.png" alt="Inspecting box of words" />
+      <p>
+        As you can see, this is a "div" having an id of "row1", we can grab this
+        div with Selenium like so
+      </p>
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              wordsContainer = WebDriverWait(driver, 10).until(
+              EC.presence_of_element_located((By.ID, "row1"))
+              )
+          </code>
+      </pre>
+      <p>
+        The code above waits up to ten seconds until an HTML element having an
+        id of "row1" appears on the screen, this element is saved in the
+        variable <span class="highlight">wordsContainer</span>.<br />
+        Once this is done, we want to collect the words inside this container,
+        which as we saw in the last image are located within "span" tags.
+      </p>
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              # Telling Selenium to wait for 10 seconds just to make sure the page will load completely
+              driver.implicitly_wait(10)
+              wordsContainer.find_elements(By.TAG_NAME, "span")
+          </code>
+      </pre>
+      <p>
+        After giving some time for the page to load, we will find all the
+        elements within <span class="highlight">wordsContainer</span> that have
+        a "span" tag, this is where the words are.
+      </p>
+    </div>
+    <h3>Parsing using requests-html</h3>
+    <div>
+      <p>
+        If you try to grab all the words using
+        <span class="highlight"
+          >wordsContainer.find_elements(By.TAG_NAME, "span")</span
+        >, you will only find around 20 words, the rest will be empty
+        strings!<br />
+        I am not sure what is the reason for this, however, it doesn't matter,
+        we can use <span class="highlight">driver.page_source</span> to view the
+        complete HTML of the page which will contain the "row1" div and all the
+        words inside of it.
+      </p>
+      <p>
+        Here comes the part where I use a scraping library called
+        <a
+          href="https://docs.python-requests.org/projects/requests-html/en/latest/"
+          >requests-html</a
+        >
+        to parse the HTML from
+        <span class="highlight">driver.page_source</span>.
+      </p>
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              html = HTML(html=driver.page_source)
+              match = html.find("#row1",first=True)
+              words = match.text.split(" ")
+          </code>
+      </pre>
+      The code above parses the HTML from the Selenium driver, then it locates
+      the "row1" div, and finally, it extracts the text inside of it which will
+      be a big string formed by each word within a span tag separated by a
+      space.<br />
+      (e.g. the string will be
+      <span class="highlight">"next being another how could it's once ..."</span
+      >)<br />
+      The <span class="highlight">split</span> method will be applied to this
+      string to get a list of words.
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              ['next', 'being', 'another', 'how', "could", "it's", "once", ...]
+          </code>
+      </pre>
+    </div>
+    <h2>Typing With Selenium</h2>
+    <div>
+      <p>
+        Now, we need to type the words into the input field. Just like we did
+        previously, we need to select the input field where the words should be
+        typed, inspecting the input we have <br />
+        <img src="./media/inspect-input.png" alt="Inspect input" />
+      </p>
+      <p>
+        this element has an id of "inputfield", so we need to locate it then
+        type each word in the list <span class="highlight">words</span> followed
+        by the space key.
+      </p>
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              inputField = WebDriverWait(driver, 10).until(
+                  EC.presence_of_element_located((By.ID, "inputfield"))
+                  )
+                  for word in words:
+                  inputField.send_keys(word)
+                  inputField.send_keys(Keys.SPACE)
+          </code>
+      </pre>
+      Here's a video of how fast Selenium is typing <br />
+      <div id="videoContainer">
+        <video width="100%" controls>
+          <source src="./media/fastfingers-automation.mp4" type="video/mp4" />
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <p>
+        As you can see Selenium completed all the words way before the countdown
+        finishes!<br />
+        If you wait till the time ends (that's why I am using
+        <span class="highlight">time.sleep(60)</span> at the end of the code),
+        10fastfingers will give you the following result <br />
+        <img src="./media/10fastfingers-score.png" alt="score" /><br />
+        Pretty impressive! But this is not an accurate score at all, to find out
+        the actual score, we must get the exact duration when Selenium was
+        typing.<br />
+        We can do so by getting the time displayed in the countdown and
+        subtracting it from 60.<br />
+
+        <img src="./media/timer.png" alt="timer" /> <br />
+      </p>
+      <p>
+        The id of the timer is "timer", we will select it just like before, then
+        we will extract the text from it, format it to get the final two
+        characters which will hold the number we're looking for. Don't forget to
+        cast it to an integer before doing any mathematical operations.
+      </p>
+      <!-- prettier-ignore -->
+      <pre>
+          <code>
+              timer = driver.find_element(By.ID, "timer")
+              timer = timer.text[2:]
+              timer = int(timer)
+              print(f"{(len(words) * 60) / (60 - timer)} WPM")
+          </code>
+      </pre>
+      <p>
+        Running the code again, we can find out the real speed of Selenium (at
+        least on my PC)<br />
+        <img src="./media/real-speed.png" alt="real speed" />
+      </p>
+      <div id="conclusionContainer">
+        <p id="conclusion">That's 960 WPM!</p>
+      </div>
+    </div>
+  </body>
+</html>

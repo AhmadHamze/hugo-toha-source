@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Storybook with React</title>
+    
+
+
+
+
+
+
+
+
+  
+
+
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/layouts/main.css"/>
+<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/navigators/navbar.css"/>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+
+
+<link rel="icon" type="image/png" href="/images/favicon_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_3.png" />
+
+
+<link rel="stylesheet" href="/css/style.css"/>
+
+    
+<meta name="description" content="Storybook with React" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css"
+/>
+<link rel="stylesheet" href="/css/layouts/single.css"/>
+<link rel="stylesheet" href="/css/navigators/sidebar.css">
+
+
+    
+    
+  </head>
+
+  <body data-spy="scroll" data-target="#TableOfContents" data-offset="80">
+    <div class="container-fluid bg-dimmed wrapper">
+      
+      
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+  <div class="container">
+      <button class="navbar-toggler navbar-light" id="sidebar-toggler" type="button" onclick="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+      <img src="/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_3.png">Ahmad Hamze Homepage</a>
+    <button class="navbar-toggler navbar-light" id="toc-toggler" type="button" onclick="toggleTOC()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse lang-selector" id="top-nav-items">
+      <ul class="navbar-nav ml-auto">
+      
+      </ul>
+    </div>
+  </div>
+  
+  <img src="/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_3.png" class="d-none" id="main-logo">
+  <img src="/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_3.png" class="d-none" id="inverted-logo">
+</nav>
+
+
+
+      
+      
+  <section class="sidebar-section" id="sidebar-section">
+    <div class="sidebar-holder">
+      <div class="sidebar" id="sidebar">
+        <input type="text" value="" placeholder="Search" data-search="" id="search-box" />
+        <div class="sidebar-tree">
+          <ul class="tree" id="tree">
+            <li id="list-heading"><a href="/posts" data-filter="all">Posts</a></li>
+            <div class="subtree">
+                
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/estimating-pi/">Monte-Carlo Estimation of Pi</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/earthquakes/">Mapping Earthquakes Locations on a Map</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/pictionary/">Pictionary using websockets</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/c&#43;&#43;-matrix/">Simple C&#43;&#43; matrix calculation</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/algorithmics/">Algorithmics Blogs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/algorithmics/memoization/">Recursion with Memoization</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/automation/">Automation Programs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/automation/puppeteer-vs-selenium/">Puppeteer vs Selenium</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/automation/selenium-speed-test/">Selenium Speed Test</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/opinion/">Opinion Blogs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/opinion/advice-to-myself/">Advice to my past self</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/opinion/first-react-job/">Web Dev Learned Lessons</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+    
+    
+  
+  
+    
+    <li>
+      <i class="fas fa-minus-circle"></i><a class="active" href="/posts/react/">React Applications</a>
+      
+      <ul class="active">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/react/trivia-quiz/">React Trivia Quiz</a></li>
+  
+
+  
+  
+  
+  
+    
+    
+  
+  
+    
+    <li><a class="active" href="/posts/react/storybook-trivia-quiz/">Storybook with React</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+      
+      
+<section class="content-section" id="content-section">
+  <div class="content">
+    <div class="container p-0 read-area">
+      
+      <div class="hero-area col-sm-12" id="hero-area" style='background-image: url(http://AhmadHamze.github.io/posts/react/storybook-trivia-quiz/hero.png);'>
+      </div>
+
+      
+      <div class="page-content">
+        <div class="author-profile ml-auto align-self-lg-center">
+          <img class="rounded-circle" src='/images/my-photo.jpg'/>
+          <h5 class="author-name">Ahmad Hamze</h5>
+          <p>October 24, 2021</p>
+        </div>
+
+        <div class="title">
+          <h1>Storybook with React</h1>
+        </div>
+
+        <div class="post-content" id="post-content">
+          <p>In this blog, I will be showing how to use <a href="https://storybook.js.org/">Storybook</a> with React and talk a bit about its benefits.</p>
+<p>I have used Storybook during my first job as a frontend developer, and I enjoyed every moment of it.</p>
+<h1 id="what-is-storybook">What is Storybook</h1>
+<p>Here&rsquo;s a description from the official website</p>
+<blockquote>
+<p>Storybook is an open source tool for building UI components and pages in isolation. It streamlines UI development, testing, and documentation.</p>
+</blockquote>
+<p>Couldn&rsquo;t say it better myself!</p>
+<p>A storybook book is a collection of stories, think of a story as being the different representations of a certain component.<br>
+For example, a header component could have a story that showcases the header in light mode and in dark mode, we will see an example soon!</p>
+<p>Keep in mind that as a frontend developer you should create a story for every UI component that you create in your React application.</p>
+<h2 id="installation">Installation</h2>
+<p>To install Storybook, you can use Yarn or npm (<code>yarn install storybook</code>), a &ldquo;stories&rdquo; folder will be added into the &ldquo;src&rdquo; folder, it contains some boilerplate stories which you can explore.</p>
+<p>To start Storybook run <code>yarn run storybook</code>.</p>
+<p><img src="./images/storybook_default.png" alt="Default stories"></p>
+<p>However, if you&rsquo;re using React you might get an error with a message mentioning conflicting babel-loader versions.<br>
+This is a known issue, to solve it just add the following lines in the package.json file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">  <span style="color:#e6db74">&#34;resolutions&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+    <span style="color:#f92672">&#34;babel-loader&#34;</span>: <span style="color:#e6db74">&#34;8.1.0&#34;</span>
+  }
+</code></pre></div><h2 id="creating-stories">Creating Stories</h2>
+<p>To showcase Storybook, I will be using a React trivia quiz project, you can find it on <a href="https://github.com/AhmadHamze/Trivia-Quizz-React">Github</a>, there is also a <a href="https://ahmadhamze.github.io/posts/react/trivia-quiz/">blog</a> explaining some of the code.</p>
+<p>Let&rsquo;s start with creating the most basic story.</p>
+<h3 id="a-basic-story">A Basic Story</h3>
+<p>In the trivia quiz project, I created a <strong>Button</strong> component, this component has a <em>navigation</em> prop which is a boolean.</p>
+<p>This prop controls the <em>className</em> of <strong>Button</strong>, in case <em>navigation</em> is true, the background color of the button will be blue, otherwise, it will be green.</p>
+<p>We can say that this component has two states, depending on the value of the boolean <em>navigation</em>, we want a story that showcases both states, let&rsquo;s see how to do it.</p>
+<p>Create a <strong>Button.stories.tsx</strong> file (use the <em>js</em> extension if you&rsquo;re not using Typescript), containing this code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Button</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;./Button&#34;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Fuctionality/Button&#34;</span>,
+  <span style="color:#a6e22e">component</span>: <span style="color:#66d9ef">Button</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Navigation</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> &lt;<span style="color:#f92672">Button</span> <span style="color:#a6e22e">navigation</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">true</span>}&gt;<span style="color:#a6e22e">Next</span>&lt;/<span style="color:#f92672">Button</span>&gt;;
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Start</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> &lt;<span style="color:#f92672">Button</span> <span style="color:#a6e22e">navigation</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">false</span>}&gt;<span style="color:#a6e22e">Start</span>&lt;/<span style="color:#f92672">Button</span>&gt;;
+</code></pre></div><p>This format is called &ldquo;component story&rdquo;, it has a default export and one or more named exports (in this case it has two).</p>
+<p>The <em>Button</em> story is comprised of <em>Navigation</em> and <em>Start</em> building. Building each component story is quite simple, just call the React component with the needed prop.</p>
+<p>The <code>title</code> property inside the default export is mandatory, also, it should be unique. This is the text you see in the left navigation panel in Storybook.<br></p>
+<p><img src="./images/navigation_storybook.png" alt="Navigation bar"></p>
+<p>As you can see, both stories that we created are present in the navigation bar, you can click on each one to see the component.</p>
+<p>Here is the <em>Navigation</em> story</p>
+<p><img src="./images/navigation_story.png" alt="Navigation story"></p>
+<p>and the <em>Start</em> story</p>
+<p><img src="./images/start_story.png" alt="Start story"></p>
+<p>This is great, but it barely scratches the surface of what Storybook can do.</p>
+<p>If you look at the bottom of the page, you will see a panel with a message saying &ldquo;This story is not configured to handle controls. Learn how to add controls&rdquo;.</p>
+<p><img src="./images/no_controls.png" alt="No controls"></p>
+<p>Controls literally allows you to control your stories, here&rsquo;s how to add them</p>
+<h3 id="controls">Controls</h3>
+<p>Let&rsquo;s see how to build controls on a new component, <strong>QuestionCard</strong>.</p>
+<p>Just like before, we need a file <strong>QuestionCard.stories.tsx</strong>, we begin by the default export</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Story</span>, <span style="color:#a6e22e">Meta</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;@storybook/react/types-6-0&#34;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">QuestionCard</span>, <span style="color:#a6e22e">QuestionCardProps</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;./QuestionCard&#34;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;QuestionCard/Card&#34;</span>,
+  <span style="color:#a6e22e">component</span>: <span style="color:#66d9ef">QuestionCard</span>,
+} <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">Meta</span>;
+</code></pre></div><blockquote>
+<p>Notice that <strong>QuestionCardProps</strong> are imported as well, I suggest taking a look at the React component <strong>QuestionCard</strong> to better understand what&rsquo;s going on, especially how it&rsquo;s built using different components.</p>
+</blockquote>
+<p>We will be using a feature added in version 6, that is arguments, it allows the sending of arguments to a story,
+the props of a component are considered arguments.</p>
+<p>The first thing we need to do is to create a template</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Template</span>: <span style="color:#66d9ef">Story</span>&lt;<span style="color:#f92672">QuestionCardProps</span>&gt; <span style="color:#f92672">=</span> (<span style="color:#a6e22e">args</span>) <span style="color:#f92672">=&gt;</span> &lt;<span style="color:#f92672">QuestionCard</span> {<span style="color:#a6e22e">...args</span>} /&gt;;
+</code></pre></div><p>Then, we need to bind this template to the story before sending the arguments to the story.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">QuestionCardNoAnswerYet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Template</span>.<span style="color:#a6e22e">bind</span>({});
+
+<span style="color:#a6e22e">QuestionCardNoAnswerYet</span>.<span style="color:#a6e22e">args</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">answers</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;answer 1&#34;</span>, <span style="color:#e6db74">&#34;answer 2&#34;</span>, <span style="color:#e6db74">&#34;answer 3&#34;</span>, <span style="color:#e6db74">&#34;answer 4&#34;</span>],
+  <span style="color:#a6e22e">question</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;question 1&#34;</span>,
+  <span style="color:#a6e22e">questionNr</span>: <span style="color:#66d9ef">1</span>,
+  <span style="color:#a6e22e">userAnswer</span>: <span style="color:#66d9ef">undefined</span>,
+  <span style="color:#a6e22e">totalQuestions</span>: <span style="color:#66d9ef">10</span>,
+};
+</code></pre></div><p>The <em>Card</em> story now has a state called <strong>QuestionCardNoAnswerYet</strong>, the argument <code>userAnswer: undefined</code> mimics the state of the component before the user chooses an answer.</p>
+<p>Here is how this state of the story looks like</p>
+<p><img src="./images/story_before.png" alt="Card no answer"></p>
+<p>Similarly, we can create a state that mimics the component when the user gives the correct answer.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">QuestionCardCorrectAnswerGiven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Template</span>.<span style="color:#a6e22e">bind</span>({});
+<span style="color:#a6e22e">QuestionCardCorrectAnswerGiven</span>.<span style="color:#a6e22e">args</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">answers</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;answer 1&#34;</span>, <span style="color:#e6db74">&#34;answer 2&#34;</span>, <span style="color:#e6db74">&#34;answer 3&#34;</span>, <span style="color:#e6db74">&#34;answer 4&#34;</span>],
+  <span style="color:#a6e22e">question</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;question 1&#34;</span>,
+  <span style="color:#a6e22e">questionNr</span>: <span style="color:#66d9ef">1</span>,
+  <span style="color:#a6e22e">userAnswer</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">question</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;question 1&#34;</span>,
+    <span style="color:#a6e22e">answer</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;answer 2&#34;</span>,
+    <span style="color:#a6e22e">correctAnswer</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;answer 2&#34;</span>,
+    <span style="color:#a6e22e">isCorrect</span>: <span style="color:#66d9ef">true</span>,
+  },
+  <span style="color:#a6e22e">totalQuestions</span>: <span style="color:#66d9ef">10</span>,
+};
+</code></pre></div><p>The <strong>QuestionCardCorrectAnswerGiven</strong> has the argument</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"> <span style="color:#a6e22e">userAnswer</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">question</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;question 1&#34;</span>,
+    <span style="color:#a6e22e">answer</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;answer 2&#34;</span>,
+    <span style="color:#a6e22e">correctAnswer</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;answer 2&#34;</span>,
+    <span style="color:#a6e22e">isCorrect</span>: <span style="color:#66d9ef">true</span>,
+  }
+</code></pre></div><p>Pay attention to <code>isCorrect: true</code>, this is what is going to make the difference between a correct answer and an incorrect one.</p>
+<p><img src="./images/story_correct.png" alt="Card correct answer"></p>
+<p>Now, the best part!</p>
+<p>Take a look at the controls panel</p>
+<p><img src="./images/controls.png" alt="Controls"></p>
+<p>Not only you can see the arguments given to the current state, but you can edit them.</p>
+<p>I will change  <code>userAnswer.isCorrect</code> to <code>false</code></p>
+<p><img src="./images/userAnswer_false.png" alt="Change isCorrect"></p>
+<p>and the main question to <code>hello world!</code></p>
+<p><img src="./images/question_hello.png" alt="Change question"></p>
+<p>You can see the effects of these changes immediately on the story</p>
+<p><img src="./images/story_changed.png" alt=""></p>
+<p>This is how powerful Storybook is, it allows you to edit your components in an isolated space allowing different ways to test them.<br></p>
+<h3 id="final-words">Final Words</h3>
+<p>This is a glimpse of the capabilities of Storybook, there is much more you can do with it.</p>
+<p>The storybook can be exported into different formats and sent to the client or the business manager for feedback, they can do some changes themselves which strengthens the trust between the client and the team.</p>
+
+        </div>
+
+        
+        
+          <div class="btn-improve-page">
+              <a href="https://github.com/AhmadHamze/AhmadHamze.github.io.git/edit//content/posts/react/storybook-trivia-quiz/index.md">
+                <i class="fas fa-code-branch"></i>
+                Improve this page
+              </a>
+          </div>
+        
+
+        
+      <hr />
+        <div class="row next-prev-navigator">
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+      <div class="col-md-6 previous-article">
+        <a href="/posts/automation/selenium-speed-test/" class="btn btn-outline-info">
+          <span><i class="fas fa-chevron-circle-left"></i> Prev</span>
+          <br />
+          <span>Selenium Speed Test</span>
+        </a>
+      </div>
+      
+    
+    
+      
+        
+        
+          
+              
+          
+        
+        <div class="col-md-6 next-article">
+          <a href="/posts/react/trivia-quiz/" class="btn btn-outline-info">
+            <span>Next <i class="fas fa-chevron-circle-right"></i></span>
+            <br />
+            <span>A React Typescript Trivia Quiz</span>
+          </a>
+        </div>
+      
+    
+  
+
+  
+
+  
+
+  
+
+</div>
+
+      <hr />
+      
+      
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+      
+      
+  <section class="toc-section" id="toc-section">
+    
+  </section>
+
+    </div>
+
+    
+
+  
+
+
+
+
+  
+
+
+
+
+  
+  
+    
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<footer class="container-fluid text-center align-content-center footer pb-2">
+  <div class="container pt-5">
+    <div class="row text-left">
+      <div class="col-md-4 col-sm-12">
+        <h5>Navigation</h5>
+        
+        <ul>
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#About">About me</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#Skills">Skills</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#projects">Projects</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#recent-posts">Blogs</a>
+              </li>
+            
+        </ul>
+        
+
+      </div>
+      
+      <div class="col-md-4 col-sm-12">
+        <h5>Contact me:</h5>
+        <ul>
+          
+          <li><span>Email: </span> <span>ahmadhamze@yahoo.com</span></li>
+          
+        </ul>
+      </div>
+      
+      
+    </div>
+  </div>
+  <hr />
+  <div class="container">
+    <div class="row text-left">
+      <div class="col-md-4">
+        <a id="theme" href="https://github.com/hossainemruz/toha" target="#">
+          <img src="/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png">
+          Toha
+        </a>
+      </div>
+      <div class="col-md-4 text-center">© 2021 Copyright.</div>
+      <div class="col-md-4 text-right">
+        <a id="hugo" href="https://gohugo.io/">Powered by
+        <img
+          src="/images/hugo-logo.svg"
+          alt="Hugo Logo"
+          height="18"
+        />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/navbar.js"></script>
+<script src="/js/main.js"></script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<script src="/js/single.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,24 @@
+section:
+  name: About me
+  id: About
+  enable: True
+  weight: 1
+  showOnNavbar: True
+  template: sections/about.html
+
+designation: Full Stack engineer and AI enthusiast
+
+resume: "files/CV_Ahmad_Hamze.pdf"
+
+summary: "I consider myself to be someone who uses logic and computers to solve problems. Whether it's about creating an AI from scratch or simply teaching a student, it's always about solving problems."
+
+socialLinks:
+- name: Github
+  icon: "fab fa-github"
+  url: "https://github.com/AhmadHamze"
+- name: Linkedin
+  icon: "fab fa-linkedin-in"
+  url: "https://www.linkedin.com/in/ahmad-hamze-4161a0170/"
+- name: Envelope
+  icon: "fas fa-envelope"
+  url: "mailto:ahmadhamze@yahoo.com"

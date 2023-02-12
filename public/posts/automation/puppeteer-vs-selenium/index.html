@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Puppeteer vs Selenium</title>
+    
+
+
+
+
+
+
+
+
+  
+
+
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/layouts/main.css"/>
+<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/navigators/navbar.css"/>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+
+
+<link rel="icon" type="image/png" href="/images/favicon_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_3.png" />
+
+
+<link rel="stylesheet" href="/css/style.css"/>
+
+    
+<meta name="description" content="Comparing Puppeteer and Selenium using the 10fastfingers test" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css"
+/>
+<link rel="stylesheet" href="/css/layouts/single.css"/>
+<link rel="stylesheet" href="/css/navigators/sidebar.css">
+
+
+    
+    
+  </head>
+
+  <body data-spy="scroll" data-target="#TableOfContents" data-offset="80">
+    <div class="container-fluid bg-dimmed wrapper">
+      
+      
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+  <div class="container">
+      <button class="navbar-toggler navbar-light" id="sidebar-toggler" type="button" onclick="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+      <img src="/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_3.png">Ahmad Hamze Homepage</a>
+    <button class="navbar-toggler navbar-light" id="toc-toggler" type="button" onclick="toggleTOC()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse lang-selector" id="top-nav-items">
+      <ul class="navbar-nav ml-auto">
+      
+      </ul>
+    </div>
+  </div>
+  
+  <img src="/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_3.png" class="d-none" id="main-logo">
+  <img src="/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_3.png" class="d-none" id="inverted-logo">
+</nav>
+
+
+
+      
+      
+  <section class="sidebar-section" id="sidebar-section">
+    <div class="sidebar-holder">
+      <div class="sidebar" id="sidebar">
+        <input type="text" value="" placeholder="Search" data-search="" id="search-box" />
+        <div class="sidebar-tree">
+          <ul class="tree" id="tree">
+            <li id="list-heading"><a href="/posts" data-filter="all">Posts</a></li>
+            <div class="subtree">
+                
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/estimating-pi/">Monte-Carlo Estimation of Pi</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/earthquakes/">Mapping Earthquakes Locations on a Map</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/pictionary/">Pictionary using websockets</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/c&#43;&#43;-matrix/">Simple C&#43;&#43; matrix calculation</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/algorithmics/">Algorithmics Blogs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/algorithmics/memoization/">Recursion with Memoization</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+    
+    
+  
+  
+    
+    <li>
+      <i class="fas fa-minus-circle"></i><a class="active" href="/posts/automation/">Automation Programs</a>
+      
+      <ul class="active">
+        
+  
+  
+  
+  
+    
+    
+  
+  
+    
+    <li><a class="active" href="/posts/automation/puppeteer-vs-selenium/">Puppeteer vs Selenium</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/automation/selenium-speed-test/">Selenium Speed Test</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/opinion/">Opinion Blogs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/opinion/advice-to-myself/">Advice to my past self</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/opinion/first-react-job/">Web Dev Learned Lessons</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/react/">React Applications</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/react/trivia-quiz/">React Trivia Quiz</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/react/storybook-trivia-quiz/">Storybook with React</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+      
+      
+<section class="content-section" id="content-section">
+  <div class="content">
+    <div class="container p-0 read-area">
+      
+      <div class="hero-area col-sm-12" id="hero-area" style='background-image: url(http://AhmadHamze.github.io/posts/automation/puppeteer-vs-selenium/hero.jpg);'>
+      </div>
+
+      
+      <div class="page-content">
+        <div class="author-profile ml-auto align-self-lg-center">
+          <img class="rounded-circle" src='/images/my-photo.jpg'/>
+          <h5 class="author-name">Ahmad Hamze</h5>
+          <p>November 4, 2021</p>
+        </div>
+
+        <div class="title">
+          <h1>Puppeteer vs Selenium</h1>
+        </div>
+
+        <div class="post-content" id="post-content">
+          
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <p class="disclaimer">
+      This blog is for learning purposes only, you can find the complete code on
+      my
+      <a href="https://github.com/AhmadHamze/Puppeteer-vs-Selenium">Github</a>
+      go there to find the instructions necessary to run the code.
+    </p>
+    <h2>Introduction</h2>
+    <p>
+      In a previous
+      <a
+        href="https://ahmadhamze.github.io/posts/automation/selenium-speed-test/"
+        >blog</a
+      >
+      I created a selenium bot that performs the
+      <a href="https://10fastfingers.com">10fastfingers</a> typing speed, it
+      scored 960 WPM.<br />
+      This code was far from perfect, I did it quickly without taking into
+      consideration the best performance that could be achieved. This blog is
+      aimed at enhancing the Selenium code and comparing it with another
+      automation library called <a href="https://pptr.dev/">Puppeteer</a>.<br />
+    </p>
+    <p class="disclaimer">
+      The comparison I'm about to show only scratches the surface of what both
+      libraries can do, do not judge a certain library by what you're going to
+      see, there are many different criteria that I am not taking into
+      consideration.
+    </p>
+    <h2>The Enhanced Selenium Code</h2>
+    <p>
+      I will go over the enhancements made to the old code, if you need to check
+      the old code here's the
+      <a href="https://github.com/AhmadHamze/selenium-typingspeed">link</a>.
+    </p>
+    <h4>Waiting for the highlight class</h4>
+    <p>
+      The old approach I took to wait for all the words to appear on the page
+      was to wait until the page completes loading, it turns out there is a much
+      better approach.
+    </p>
+    <p>The current word you're supposed to type is always highlighted</p>
+    <img src="./media/highlightedword.png" alt="highlightedword" />
+    <p>This is done by applying a "highlight" class to the word</p>
+    <img src="./media/highlightclass.png" alt="highlightedclass" />
+    <p>
+      We can wait for this class to appear instead of waiting for the whole page
+      to load. We've already seen how to do similar things in the old code
+    </p>
+    <!-- prettier-ignore -->
+    <pre>
+        <code>
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "highlight"))
+            )
+        </code>
+    </pre>
+    <h4>Regex Instead of Requests-html</h4>
+    <p>
+      In the old code, I used a scraping library called
+      <a
+        href="https://docs.python-requests.org/projects/requests-html/en/latest/"
+        >requests-html</a
+      >
+      to parse the HTML retrieved from the page.<br />
+      There are faster alternatives, simply search for the words inside the
+      retrieved HTML using regex.
+    </p>
+    <!-- prettier-ignore -->
+    <pre>
+        <code>
+            spans = re.findall(r"<span wordnr[^<]*", driver.page_source)
+            words = map(lambda span : span.split(">")[1], spans)
+            words = list(words)
+        </code>
+    </pre>
+    <h4>Remove Selenium Space Key</h4>
+    <p>
+      In the old code, I used the built-in
+      <span class="highlight">Keys.SPACE</span> after typing each word, which
+      types the space bar. A faster alternative is to simply concatenate each
+      word with a space.
+    </p>
+    <!-- prettier-ignore -->
+    <pre>
+        <code>
+            for word in words:
+                inputField.send_keys(word + " ")
+        </code>
+    </pre>
+    <p class="disclaimer">
+      I tried using a list comprehension instead of a for loop to make it faster
+      but I couldn't notice a difference.
+    </p>
+    <p>
+      That's all the improvements made to the Selenium code, now we can run the
+      program and see the results, here is a video showing how fast the typing
+      has become.
+    </p>
+    <div class="videoContainer">
+      <video width="100%" controls>
+        <source src="./media/selenium.mp4" type="video/mp4" />
+        Your browser does not support HTML video.
+      </video>
+    </div>
+    <p>
+      Just like before, the code computes the typing speed, I also added the
+      complete time taken to open, navigate, and close the browser, here's the
+      result.
+    </p>
+    <img src="./media/seleniumruntime.png" alt="Selenium runtime" />
+    <p>
+      That's 2072 WPM! More than double the score of the old code (960 WPM), and
+      the whole program took less than 18 seconds.<br />
+      This is a lucky run, most of the runs score a bit more than 1700 WPM, and
+      take around 22 seconds, this is related to the hardware and the internet
+      speed that I am using.<br />
+      The major contributor to this enhancement is concatenating a space to the
+      end of each word, instead of using the provided space key from Selenium.
+      This simple change made the biggest difference.
+    </p>
+    <h2>Puppeteer</h2>
+    <p>
+      Now it's the time to do the same thing with Puppeteer.<br />
+      To avoid an unnecessary installation of another chrome browser, I used the
+      <a href="https://www.npmjs.com/package/puppeteer-core">puppeteer-core</a>
+      library which is identical to puppeteer, however, it doesn't come with a
+      default Chrome browser.<br />
+      You have to provide the location of your Chrome browser to puppeteer-core
+      To be able to launch it.<br />
+      Unlike Selenium, Puppeteer is built for chrome (it doesn't work on other
+      browsers yet), so you don't need a driver to launch the browser.
+    </p>
+    <h4>Code</h4>
+    <p>
+      The default Configuration of Puppeteer does not open a browser, we can
+      change that by setting the "headless" property to false.
+    </p>
+    <!-- prettier-ignore -->
+    <pre>
+        <code>
+            const browser = await puppeteer.launch({
+                executablePath: "/usr/bin/google-chrome",
+                headless: false,
+                // This line fixes the viewport of the browser
+                defaultViewport: null,
+              });
+        </code>
+    </pre>
+    <p>
+      The rest of the code is identical to Selenium, the only difference is when
+      selecting the typing input.<br />
+      10fastfingers opens with the cursor set on the typing input, so we don't
+      need to select it if we can send the words directly. This can be done with
+      Puppeteer
+    </p>
+    <pre>
+      <code>
+        for (word of words) {
+          await page.keyboard.type(word + " ");
+        }
+      </code>
+    </pre>
+    <p>Now, let's run the code and see how fast it is</p>
+    <div class="videoContainer">
+      <video width="100%" controls>
+        <source src="./media/puppeteer.mp4" type="video/mp4" />
+        Your browser does not support HTML video.
+      </video>
+    </div>
+    <p>
+      You can clearly see that Puppeteer types slower than Selenium, here's the
+      result
+    </p>
+    <img src="./media/puppeteerruntime2.png" alt="puppet runtime" />
+    <p>
+      624 WPM, and 50 seconds to complete, this is much slower than Selenium.<br />
+    </p>
+    <h2>Headless mode</h2>
+    <p>
+      The final comparison I tried is to run both programs on headless mode.<br />
+      As mentioned before, the default behavior of Puppeteer is headless, so to
+      enable it again just remove
+      <span class="highlight">headless: false</span> from the code.<br />
+      When it comes to Selenium you have to add these lines
+    </p>
+    <pre>
+      <code>
+        from selenium.webdriver.chrome.options import Options
+
+        options = Options()
+        options.headless = True
+        # This line replaces the old driver
+        driver = webdriver.Chrome(service=serv, options=options)
+      </code>
+    </pre>
+    <p>
+      Obviously, you're not going to see the words getting typed anymore. No
+      other changes are made to the code so everything should be working
+      properly.<br />
+      However, if you're like me and want visual proof that this is still
+      working fine, there is a way to do that. In 10fastfingers typing a correct
+      word changes its color to green, otherwise, it's changed to red.
+    </p>
+    <img src="./media/words-color.png" alt="words color" />
+    <p>
+      Inspecting the words again, it turns out a class of "correct" is added to
+      the word when it's typed correctly, otherwise the class "wrong" is added.
+    </p>
+    <img src="./media/inspect-correct.png" alt="" />
+    <p>
+      Therefore, to make sure everything is still fine we can simply print the
+      HTML of the page after the program ends, we should see the "correct" class
+      added to all words.<br />
+      Indeed, that's what happens
+    </p>
+    <img src="./media/assert-correct.png" alt="assert correct" />
+    <p>Here is the result of Selenium</p>
+    <img src="./media/selenium-headless.png" alt="Selenium headless" />
+    <p>And the result of Puppeteer</p>
+    <img src="./media/puppeteernobrowser.png" alt="Puppeteer headless" />
+    <p>
+      The typing speed in headless mode is much more significant!<br />
+      Selenium jumped to 5685 WPM and surprisingly Puppeteer has the advantage
+      at 5715 WPM, still, the overall time taken by Puppeteer is more than that
+      of Selenium (13 seconds for Selenium and 20 for Puppeteer).
+    </p>
+    <p>Here's a comparison table</p>
+    <div class="center">
+      <table>
+        <th>Criteria</th>
+        <th>Selenium</th>
+        <th>Puppeteer</th>
+        <tr>
+          <td>Typing Speed (WPM)</td>
+          <td>2072</td>
+          <td>624</td>
+        </tr>
+        <tr>
+          <td>Total Runtime (seconds)</td>
+          <td>18</td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td>Typing Speed Headless Mode (WPM)</td>
+          <td>5685</td>
+          <td>5715</td>
+        </tr>
+        <tr>
+          <td>Total Runtime Headless Mode (seconds)</td>
+          <td>13</td>
+          <td>20</td>
+        </tr>
+      </table>
+    </div>
+    <h2>Conclusion</h2>
+    <p>
+      It seems that Selenium wins this round, but Puppeteer has much more to
+      offer, it's able to modify responses using the Chrome DevTools Protocol
+      (CDP), I am yet to discover this technology.
+    </p>
+  </body>
+</html>
+
+        </div>
+
+        
+        
+          <div class="btn-improve-page">
+              <a href="https://github.com/AhmadHamze/AhmadHamze.github.io.git/edit//content/posts/automation/puppeteer-vs-selenium/index.html">
+                <i class="fas fa-code-branch"></i>
+                Improve this page
+              </a>
+          </div>
+        
+
+        
+      <hr />
+        <div class="row next-prev-navigator">
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+      <div class="col-md-6 previous-article">
+        <a href="/posts/algorithmics/memoization/" class="btn btn-outline-info">
+          <span><i class="fas fa-chevron-circle-left"></i> Prev</span>
+          <br />
+          <span>Enhancing Recursion with Memoization</span>
+        </a>
+      </div>
+      
+    
+    
+      
+        
+        
+          
+              
+          
+        
+        <div class="col-md-6 next-article">
+          <a href="/posts/automation/selenium-speed-test/" class="btn btn-outline-info">
+            <span>Next <i class="fas fa-chevron-circle-right"></i></span>
+            <br />
+            <span>Selenium Speed Test</span>
+          </a>
+        </div>
+      
+    
+  
+
+  
+
+</div>
+
+      <hr />
+      
+      
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+      
+      
+  <section class="toc-section" id="toc-section">
+    
+  </section>
+
+    </div>
+
+    
+
+  
+
+
+
+
+  
+
+
+
+
+  
+  
+    
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<footer class="container-fluid text-center align-content-center footer pb-2">
+  <div class="container pt-5">
+    <div class="row text-left">
+      <div class="col-md-4 col-sm-12">
+        <h5>Navigation</h5>
+        
+        <ul>
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#About">About me</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#Skills">Skills</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#projects">Projects</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#recent-posts">Blogs</a>
+              </li>
+            
+        </ul>
+        
+
+      </div>
+      
+      <div class="col-md-4 col-sm-12">
+        <h5>Contact me:</h5>
+        <ul>
+          
+          <li><span>Email: </span> <span>ahmadhamze@yahoo.com</span></li>
+          
+        </ul>
+      </div>
+      
+      
+    </div>
+  </div>
+  <hr />
+  <div class="container">
+    <div class="row text-left">
+      <div class="col-md-4">
+        <a id="theme" href="https://github.com/hossainemruz/toha" target="#">
+          <img src="/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png">
+          Toha
+        </a>
+      </div>
+      <div class="col-md-4 text-center">© 2021 Copyright.</div>
+      <div class="col-md-4 text-right">
+        <a id="hugo" href="https://gohugo.io/">Powered by
+        <img
+          src="/images/hugo-logo.svg"
+          alt="Hugo Logo"
+          height="18"
+        />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/navbar.js"></script>
+<script src="/js/main.js"></script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<script src="/js/single.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,41 @@
+baseURL: http://AhmadHamze.github.io/
+languageCode: en-us
+title: "Ahmad Hamze Homepage"
+theme: "toha"
+
+# Manage languages
+
+languages:
+  en:
+    languageName: English
+    weight: 1
+
+markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 6
+    ordered: false
+  goldmark:
+    renderer:
+      unsafe: true
+
+# Enable global emoji support
+enableEmoji: true
+
+params:
+  background: "images/wil-stewart-space.jpg"
+  # GitHub repo URL of the site
+  gitRepo: https://github.com/AhmadHamze/AhmadHamze.github.io.git
+
+  math: true
+
+  # specify whether you want to write some blog posts or not
+  enableBlogPost: true
+
+  # specify whether you want to show Table of Contents in reading page
+  enableTOC: false
+
+  # Provide newsletter configuration. This feature hasn't been implemented yet.
+  # Currently, you can just hide it from the footer.
+  newsletter:
+    enable: false

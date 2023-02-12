@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enhancing Recursion with Memoization</title>
+    
+
+
+
+
+
+
+
+
+  
+
+
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/layouts/main.css"/>
+<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/navigators/navbar.css"/>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+
+
+<link rel="icon" type="image/png" href="/images/favicon_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_3.png" />
+
+
+<link rel="stylesheet" href="/css/style.css"/>
+
+    
+<meta name="description" content="Enhancing Recursion with Memoization Using Fibonacci" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css"
+/>
+<link rel="stylesheet" href="/css/layouts/single.css"/>
+<link rel="stylesheet" href="/css/navigators/sidebar.css">
+
+
+    
+    
+  </head>
+
+  <body data-spy="scroll" data-target="#TableOfContents" data-offset="80">
+    <div class="container-fluid bg-dimmed wrapper">
+      
+      
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+  <div class="container">
+      <button class="navbar-toggler navbar-light" id="sidebar-toggler" type="button" onclick="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+      <img src="/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_3.png">Ahmad Hamze Homepage</a>
+    <button class="navbar-toggler navbar-light" id="toc-toggler" type="button" onclick="toggleTOC()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse lang-selector" id="top-nav-items">
+      <ul class="navbar-nav ml-auto">
+      
+      </ul>
+    </div>
+  </div>
+  
+  <img src="/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_3.png" class="d-none" id="main-logo">
+  <img src="/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_3.png" class="d-none" id="inverted-logo">
+</nav>
+
+
+
+      
+      
+  <section class="sidebar-section" id="sidebar-section">
+    <div class="sidebar-holder">
+      <div class="sidebar" id="sidebar">
+        <input type="text" value="" placeholder="Search" data-search="" id="search-box" />
+        <div class="sidebar-tree">
+          <ul class="tree" id="tree">
+            <li id="list-heading"><a href="/posts" data-filter="all">Posts</a></li>
+            <div class="subtree">
+                
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/estimating-pi/">Monte-Carlo Estimation of Pi</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/earthquakes/">Mapping Earthquakes Locations on a Map</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/pictionary/">Pictionary using websockets</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/c&#43;&#43;-matrix/">Simple C&#43;&#43; matrix calculation</a></li>
+  
+
+  
+  
+  
+  
+    
+    
+  
+  
+    
+    <li>
+      <i class="fas fa-minus-circle"></i><a class="active" href="/posts/algorithmics/">Algorithmics Blogs</a>
+      
+      <ul class="active">
+        
+  
+  
+  
+  
+    
+    
+  
+  
+    
+    <li><a class="active" href="/posts/algorithmics/memoization/">Recursion with Memoization</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/automation/">Automation Programs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/automation/puppeteer-vs-selenium/">Puppeteer vs Selenium</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/automation/selenium-speed-test/">Selenium Speed Test</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/opinion/">Opinion Blogs</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/opinion/advice-to-myself/">Advice to my past self</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/opinion/first-react-job/">Web Dev Learned Lessons</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li>
+      <i class="fas fa-plus-circle"></i><a class="" href="/posts/react/">React Applications</a>
+      
+      <ul class="">
+        
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/react/trivia-quiz/">React Trivia Quiz</a></li>
+  
+
+  
+  
+  
+  
+  
+    
+    <li><a class="" href="/posts/react/storybook-trivia-quiz/">Storybook with React</a></li>
+  
+
+
+      </ul>
+    </li>
+  
+
+
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+      
+      
+<section class="content-section" id="content-section">
+  <div class="content">
+    <div class="container p-0 read-area">
+      
+      <div class="hero-area col-sm-12" id="hero-area" style='background-image: url(http://AhmadHamze.github.io/images/default-hero.jpg);'>
+      </div>
+
+      
+      <div class="page-content">
+        <div class="author-profile ml-auto align-self-lg-center">
+          <img class="rounded-circle" src='/images/my-photo.jpg'/>
+          <h5 class="author-name">Ahmad Hamze</h5>
+          <p>April 17, 2022</p>
+        </div>
+
+        <div class="title">
+          <h1>Enhancing Recursion with Memoization</h1>
+        </div>
+
+        <div class="post-content" id="post-content">
+          <p>In this blog, we will go over an example of recursion and how we can use something called memoization to increase the
+speed of the code.</p>
+<h2 id="the-fibonacci-sequence">The Fibonacci Sequence</h2>
+<p>If you&rsquo;ve never heard of it, it&rsquo;s quite simple, just start with two numbers 0 and 1, and add them together to get the next number in the sequence (yeah, that&rsquo;ll be 1 once again).</p>
+<p>Now add the new number with the one just before it to obtain the next number, so 1 + 1 and that is 2.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">n</th>
+<th style="text-align:right">Fib(n)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:right">8</td>
+</tr>
+</tbody>
+</table>
+<p>You can keep doing that indefinitely, our goal is to study the algorithm that computes the values of this sequence.</p>
+<blockquote>
+<p>Discover more about the sequence on this <a href="https://en.wikipedia.org/wiki/Fibonacci_number">wiki</a>.</p>
+</blockquote>
+<h3 id="simple-recursion">Simple Recursion</h3>
+<p>Recursion comes into mind when dealing with such a problem, after all the definition of the sequence is itself recursive, so let&rsquo;s write a Python function that computes the nth value of the sequence.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib_rec</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">return</span> n
+    <span style="color:#66d9ef">return</span> fib_rec(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib_rec(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+</code></pre></div><p>The code above is imitating the sequence verbatim, if the input is 0 or 1 return the input itself, otherwise, return the sum of the previous element and the one before it.</p>
+<blockquote>
+<p>You can test this code quickly on <a href="https://www.mycompiler.io/new/python">myCompiler.io</a>, it&rsquo;s an online code editor that allows you to run code using different programming languages.</p>
+</blockquote>
+<p>Let&rsquo;s test the function, try <strong>fib_rec(10)</strong>, you should get 55 pretty quickly.
+Then try <strong>fib_rec(30)</strong>, you should get 832040, but you will notice that the result took more time to be printed.</p>
+<p>If you try <strong>fib_rec(40)</strong> on myCompiler.io, you might get the following message <em>[Execution timed out after 10 seconds]</em>. This means that the website stopped running the code because it took too much time.</p>
+<p>You might be thinking, well that might be normal, there are things out there that just need time, the Fibonacci sequence is probably one of those.</p>
+<h3 id="non-recursive-approach">Non-Recursive Approach</h3>
+<p>Look at the following code then</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        <span style="color:#66d9ef">return</span> n
+    a, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):
+        a, b <span style="color:#f92672">=</span> b, a <span style="color:#f92672">+</span> b
+    <span style="color:#66d9ef">return</span> b
+</code></pre></div><p>Instead of using recursion, we&rsquo;re just using a for loop to add the last two sequences together, and updating the values to always get the latest two elements of the sequence.</p>
+<p>Let&rsquo;s try this function, <strong>fib(40)</strong> returns 102334155 almost instantly! Why don&rsquo;t we create a function to measure the time taken by both functions to compute values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib_time</span>(func, arg):
+    start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
+    <span style="color:#75715e"># Call the method with the argument</span>
+    func(arg)
+    end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Took </span><span style="color:#e6db74">{</span>end <span style="color:#f92672">-</span> start<span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds&#34;</span>
+</code></pre></div><p>First, let&rsquo;s see how fast <strong>fib_rec</strong> is when passed the value 30.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print (fib_time(fib_rec, <span style="color:#ae81ff">30</span>))
+</code></pre></div><p>It takes <strong>3.06 seconds</strong>, needles to say <strong>fib</strong> is much faster, how much faster? Well, we can simply try passing larger values and see when it takes 3 seconds to finish.</p>
+<p>Turns out the value is 215,000! That is 7167 times faster!</p>
+<h2 id="why-bother-with-recursion">Why bother with recursion</h2>
+<p>You might be thinking, why did I waste your time? I could&rsquo;ve just shown you the non-recursive version and been done with it.</p>
+<p>Indeed, when it comes to Fibonacci, recursion is not the best way to go, the code is faster and I would even argue that it&rsquo;s simpler especially if you don&rsquo;t use recursion often.</p>
+<p>However, sometimes you might have to use recursion, and there are ways to make it faster.</p>
+<h3 id="why-was-it-too-slow">Why was it too slow</h3>
+<p>Let&rsquo;s look back at the recursive code and see what is the problem. What&rsquo;s going on is that a lot of values are getting computed.</p>
+<p>E.g. to compute <strong>fib_rec(10)</strong> you would have to compute <strong>fib_rec(9)</strong> and <strong>fib_rec(8)</strong>, each of which will also have to call two fibs once again, and so on. That is a lot of computation, what&rsquo;s even worse is that most of the values are being recomputed so many times.</p>
+<blockquote>
+<p>It takes 54 addition operations to compute <strong>fib_rec(10)</strong>, try to find out how to figure this out</p>
+</blockquote>
+<h2 id="memoization-to-the-rescue">Memoization to the rescue</h2>
+<p>The code would be faster if we could somehow store the values instead of recomputing them over each time.</p>
+<p>That is memoization, in short, simply store the previous results in a cache, this is a net win if maintaining the code is cheaper than recomputing.</p>
+<p>We will create a recursive memoized function and see how well it fairs in terms of speed.</p>
+<h3 id="building-a-memoized-function">Building a memoized function</h3>
+<p>We want a function that stores each argument for the Fibonacci sequence alongside its value, An array will store these pairs.</p>
+<p>A helper function will be used to check if the passed value exists inside the storage.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># takes an element and a list of pairs, if the element is equal to the first part of a pair,</span>
+<span style="color:#75715e"># return the second part, otherwise return false</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_value</span>(element, pairs):
+    <span style="color:#66d9ef">for</span> (p1, p2) <span style="color:#f92672">in</span> pairs:
+        <span style="color:#66d9ef">if</span> element <span style="color:#f92672">==</span> p1:
+            <span style="color:#66d9ef">return</span> p2
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</code></pre></div><p>Now, the memoized recursive Fibonacci sequence</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib_memo</span>():
+    <span style="color:#75715e"># the cache, it starts empty, it will contain elements that looks like this (n, Fib(n))</span>
+    memo <span style="color:#f92672">=</span> []
+    <span style="color:#75715e"># This computes Fibonacci recursively just like we&#39;ve seen before, however, the difference is</span>
+    <span style="color:#75715e"># that it checks if the argument exists inside the memo array, if it does, the corresponding value</span>
+    <span style="color:#75715e"># will be returnd instead of recomputing</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f</span>(n):
+        ans <span style="color:#f92672">=</span> check_value(n, memo)
+        <span style="color:#66d9ef">if</span> ans:
+            <span style="color:#66d9ef">return</span> ans
+        <span style="color:#66d9ef">else</span>:
+            new_ans <span style="color:#f92672">=</span> n <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> f(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> f(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+            <span style="color:#75715e"># insert the new pair at the beginning of the array, this makes the code faster</span>
+            memo<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">0</span>, (n, new_ans))
+        <span style="color:#75715e"># return the answer that was just computed</span>
+        <span style="color:#66d9ef">return</span> new_ans
+    <span style="color:#75715e"># fib_memo() is returning the function f </span>
+    <span style="color:#66d9ef">return</span> f
+</code></pre></div><blockquote>
+<p>Notice that fib_memo returns a function, so to get the Fibonacci value, you will have to call it this way <code>fib_memo()(n)</code></p>
+</blockquote>
+<p>We&rsquo;re done, let&rsquo;s check if this works, how about we try 10,000. To do so we need to increase the default recursion depth in Python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<span style="color:#75715e"># Increase the recursion depth</span>
+sys<span style="color:#f92672">.</span>setrecursionlimit(<span style="color:#ae81ff">100000</span>)
+
+print (fib_time(fib_memo(), <span style="color:#ae81ff">10_000</span>))
+</code></pre></div><p>This takes around 0.28 seconds!
+This function is incredibly fast, using memoization a function that takes <strong>O(2^n)</strong> will now take <strong>O(n)</strong>.</p>
+<h2 id="final-words">Final words</h2>
+<p>Memoization can make your recursive function way faster, make sure to use it when necessary.</p>
+<p>The example above is just a demonstration of memoization, the non-recursive version is the best option here,
+it is faster and does not require lots of memory, unlike the memoized version.</p>
+
+        </div>
+
+        
+        
+          <div class="btn-improve-page">
+              <a href="https://github.com/AhmadHamze/AhmadHamze.github.io.git/edit//content/posts/algorithmics/memoization/index.md">
+                <i class="fas fa-code-branch"></i>
+                Improve this page
+              </a>
+          </div>
+        
+
+        
+      <hr />
+        <div class="row next-prev-navigator">
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+      
+        
+        
+        <div class="col-md-12 next-article">
+          <a href="/posts/automation/puppeteer-vs-selenium/" class="btn btn-outline-info">
+            <span>Next <i class="fas fa-chevron-circle-right"></i></span>
+            <br />
+            <span>Puppeteer vs Selenium</span>
+          </a>
+        </div>
+      
+    
+  
+
+</div>
+
+      <hr />
+      
+      
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+      
+      
+  <section class="toc-section" id="toc-section">
+    
+  </section>
+
+    </div>
+
+    
+
+  
+
+
+
+
+  
+
+
+
+
+  
+  
+    
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<footer class="container-fluid text-center align-content-center footer pb-2">
+  <div class="container pt-5">
+    <div class="row text-left">
+      <div class="col-md-4 col-sm-12">
+        <h5>Navigation</h5>
+        
+        <ul>
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#About">About me</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#Skills">Skills</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#projects">Projects</a>
+              </li>
+            
+            
+              
+              
+                
+              
+              <li class="nav-item">
+                <a class="smooth-scroll" href="#recent-posts">Blogs</a>
+              </li>
+            
+        </ul>
+        
+
+      </div>
+      
+      <div class="col-md-4 col-sm-12">
+        <h5>Contact me:</h5>
+        <ul>
+          
+          <li><span>Email: </span> <span>ahmadhamze@yahoo.com</span></li>
+          
+        </ul>
+      </div>
+      
+      
+    </div>
+  </div>
+  <hr />
+  <div class="container">
+    <div class="row text-left">
+      <div class="col-md-4">
+        <a id="theme" href="https://github.com/hossainemruz/toha" target="#">
+          <img src="/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png">
+          Toha
+        </a>
+      </div>
+      <div class="col-md-4 text-center">© 2021 Copyright.</div>
+      <div class="col-md-4 text-right">
+        <a id="hugo" href="https://gohugo.io/">Powered by
+        <img
+          src="/images/hugo-logo.svg"
+          alt="Hugo Logo"
+          height="18"
+        />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/navbar.js"></script>
+<script src="/js/main.js"></script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<script src="/js/single.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);">
+</script>
+
+
+
+  </body>
+</html>
