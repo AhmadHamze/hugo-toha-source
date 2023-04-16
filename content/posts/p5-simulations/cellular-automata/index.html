@@ -1,0 +1,107 @@
+---
+title: "Cellular Automata"
+date: 2023-04-15
+description: Introduction to Cellular Automata
+menu:
+sidebar:
+name: Cellular Automata
+identifier: cellular-automata
+parent: P5-js-Simulations
+weight: 10
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head></head>
+
+<body>
+  <p>
+    In the 1940's, John Von Neumann and Stanislaw Ulam wanted to design a computer able to self-repair itself.
+
+    In the real world an object can be produced only from a more complex object, suppose you want to replicated a piece
+    of paper.
+    In order to create one you need to have a more complex object, a printer.
+    The printer is a much more complex system than the paper, and in order to create a printer, you need a lot of
+    smaller components which are themselves complex and so on.
+
+    However, this is not what we happens in nature, cells are capable of self-replicating and self-repairing.
+    So, scientists contemplated the idea of creating a system that has such capabilities.
+  </p>
+  <h2>
+    Simplifiying the problem
+  </h2>
+  <p>
+    Tackling such a problem is not easy, so scientists decided to simplify the problem.
+    <span class="bold and centered">
+      How to find the logical mechanisms for self-reproduction?
+    </span>
+
+    Finding an algorithm to acheive transcription and translation would be a great start, it would also be easier to
+    formalize these concept in a descrete world.
+    <br />
+    This is when the idea of cellular automata was born.
+    <br />
+    A cellular automata is a mathematical abstraction of the real world, a modeling framework in which everything is
+    discrete.
+    There are many examples of cellular automata, in this blog we will be looking at two examples, both use a square
+    lattice (a grid).
+    <br />
+    Although the square lattice is the most common, it is possible to use a hexagonal lattice, a triangular lattice or
+    even a
+    three dimensional lattice (a cube).
+    <br />
+    It is also possible to make a simpler automaton, for example, a one dimensional automaton.
+    Take a look at <a rel="https://www.wolframalpha.com/input?i=rule+30" target="_blank">wolfram's automata</a>.
+  </p>
+  <h2>The parity rule</h2>
+  <p>
+    In the first example we will be looking at an automaton (i.e. a specific cellular automata) that uses the parity
+    rule.
+    <br />
+    Here a cell has only two states, dead or alive (0 or 1), a dead cell is a white cell, an alive cell is a black cell.
+    Each cell sums up the states of its four neighbors (up, down, left, right).
+    <br />
+    If the sum is even, the new state of the cell is 0, otherwise it is 1.
+  </p>
+  <p class="describing an image">
+    Each cell sums up the states of its four neighbors, you can see the neighboring cells in the image.
+    These are the four white cells that have a black border.
+  </p>
+  <img src="./media/parity-rule.png" alt="can't load image" />
+
+  <p>
+    If we start with only one cell alive, the next generation will look like so
+  </p>
+  <img src="./media/parity-initial.png" alt="can't load image" />
+  <h2>Boundary Conditions</h2>
+  <p>
+    Implementing the rule is pretty simple for the inner cells, but what about the cells on the edge?
+    <br />
+    How do we handle the cells that don't have four neighbors?
+    <br />
+    There are many ways to handle such cells (boundary conditions).
+    <br />
+  <ul>
+    <li>A fixed boundary condition, where the state of the cell is fixed (you choose a fixed cell as a neighbor)</li>
+    <li>Adiabatic, the same cell would be considered as a neighbor</li>
+    <li>Periodic, the cells on the edge are considered as neighbors of the cells on the other side of the grid</li>
+  </ul>
+  <br />
+  E.g. the neighboring cells for the top left cell would be:
+  <ol>
+    <li>The next cell on the right</li>
+    <li>The next cell on the bottom</li>
+    <li>The cell on the bottom left (this is the north neighbour)</li>
+    <li>The cell on the top right (this is the west neighbour)</li>
+  </ol>
+  <br />
+  In this blog we will be using the periodic boundary condition.
+  </p>
+  <h3>P5.js implementation</h3>
+  <p>
+    It is relatively easy to create a cellular automata in p5.js.
+  </p>
+</body>
+
+</html>
