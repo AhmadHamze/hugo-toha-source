@@ -13,51 +13,54 @@ weight: 10
 <!DOCTYPE html>
 <html lang="en">
 
-<head></head>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
 <body>
   <p>
-    In the 1940's, John Von Neumann and Stanislaw Ulam wanted to design a computer able to self-repair itself.
-
+    In the 1940's, John Von Neumann and Stanislaw Ulam wanted to design a computer able to self-repair.
+    <br />
     In the real world an object can be produced only from a more complex object, suppose you want to replicated a piece
     of paper.
     In order to create one you need to have a more complex object, a printer.
     The printer is a much more complex system than the paper, and in order to create a printer, you need a lot of
     smaller components which are themselves complex and so on.
-
-    However, this is not what we happens in nature, cells are capable of self-replicating and self-repairing.
-    So, scientists contemplated the idea of creating a system that has such capabilities.
+    <br />
+    However, this is not what happens in nature, cells are capable of self-replicating and self-repairing,
+    so, scientists contemplated the idea of creating a system that has such capabilities.
   </p>
   <h2>
     Simplifiying the problem
   </h2>
-  <p>
-    Tackling such a problem is not easy, so scientists decided to simplify the problem.
-    <span class="bold and centered">
-      How to find the logical mechanisms for self-reproduction?
-    </span>
+  <div>
+    <p>
+      Tackling such a problem is not easy, so scientists decided to simplify the problem.
+      <span class="bold and centered">
+        How to find the logical mechanisms for self-reproduction?
+      </span>
 
-    Finding an algorithm to acheive transcription and translation would be a great start, it would also be easier to
-    formalize these concept in a descrete world.
-    <br />
-    This is when the idea of cellular automata was born.
-    <br />
-    A cellular automata is a mathematical abstraction of the real world, a modeling framework in which everything is
-    discrete.
-    There are many examples of cellular automata, in this blog we will be looking at two examples, both use a square
-    lattice (a grid).
-    <br />
-    Although the square lattice is the most common, it is possible to use a hexagonal lattice, a triangular lattice or
-    even a
-    three dimensional lattice (a cube).
-    <br />
-    It is also possible to make a simpler automaton, for example, a one dimensional automaton.
-    Take a look at <a rel="https://www.wolframalpha.com/input?i=rule+30" target="_blank">wolfram's automata</a>.
-  </p>
+      Finding an algorithm to acheive transcription and translation would be a great start, it would also be easier to
+      formalize these concepts in a descrete world.
+      <br />
+      This is when the idea of cellular automata was born.
+      <br />
+      A cellular automata is a mathematical abstraction of the real world, a modeling framework in which everything is
+      discrete.
+      There are many examples of cellular automata, in this blog we will be looking at two examples, both use a square
+      lattice (a grid).
+      <br />
+      Although the square lattice is the most common, it is possible to use a hexagonal lattice, a triangular lattice or
+      even a three dimensional lattice (a cube).
+      <br />
+      It is also possible to make a simpler automaton, for example, a one dimensional automaton.
+      Take a look at <a rel="https://www.wolframalpha.com/input?i=rule+30" target="_blank">wolfram's automata</a>.
+    </p>
+  </div>
   <h2>The parity rule</h2>
   <p>
-    In the first example we will be looking at an automaton (i.e. a specific cellular automata) that uses the parity
-    rule.
+    In the first example we will be looking at an automaton (i.e. a specific cellular automata) that uses the <b>parity
+      rule</b>.
     <br />
     Here a cell has only two states, dead or alive (0 or 1), a dead cell is a white cell, an alive cell is a black cell.
     Each cell sums up the states of its four neighbors (up, down, left, right).
@@ -75,33 +78,124 @@ weight: 10
   </p>
   <img src="./media/parity-initial.png" alt="can't load image" />
   <h2>Boundary Conditions</h2>
-  <p>
-    Implementing the rule is pretty simple for the inner cells, but what about the cells on the edge?
-    <br />
-    How do we handle the cells that don't have four neighbors?
-    <br />
-    There are many ways to handle such cells (boundary conditions).
-    <br />
-  <ul>
-    <li>A fixed boundary condition, where the state of the cell is fixed (you choose a fixed cell as a neighbor)</li>
-    <li>Adiabatic, the same cell would be considered as a neighbor</li>
-    <li>Periodic, the cells on the edge are considered as neighbors of the cells on the other side of the grid</li>
-  </ul>
-  <br />
-  E.g. the neighboring cells for the top left cell would be:
-  <ol>
-    <li>The next cell on the right</li>
-    <li>The next cell on the bottom</li>
-    <li>The cell on the bottom left (this is the north neighbour)</li>
-    <li>The cell on the top right (this is the west neighbour)</li>
-  </ol>
-  <br />
-  In this blog we will be using the periodic boundary condition.
-  </p>
+  <div>
+    <p>
+      Implementing the rule is pretty simple for the inner cells, but what about the cells on the edge?
+      <br />
+      How do we handle the cells that don't have four neighbors?
+      <br />
+      There are many ways to handle such cells, these are called boundary conditions, here are a few examples:
+    </p>
+    <ul>
+      <li>A fixed boundary condition, where the state of the cell is fixed (you choose a fixed cell as a neighbor)</li>
+      <li>Adiabatic, the same cell would be considered as a neighbor</li>
+      <li>Periodic, the cells on the edge are considered as neighbors of the cells on the other side of the grid</li>
+    </ul>
+    <p>
+      E.g. the neighboring cells for the top left cell would be:
+    </p>
+    <ol>
+      <li>The next cell on the right</li>
+      <li>The next cell on the bottom</li>
+      <li>The cell on the bottom left (this is the north neighbour)</li>
+      <li>The cell on the top right (this is the west neighbour)</li>
+    </ol>
+    <p>
+      In this blog we will be using the periodic boundary condition.
+    </p>
+    </p>
+  </div>
   <h3>P5.js implementation</h3>
-  <p>
-    It is relatively easy to create a cellular automata in p5.js.
-  </p>
+  <div>
+    <p>
+      It is relatively easy to create a cellular automata in p5.js. You can take a look at the complete code
+      <a rel="https://github.com/AhmadHamze/simple-simulations" target="_blank">here</a>.
+      <br />
+
+      In general, we have a grid of cells that saves the state of each cell, when a cell is clicked it flips its state.
+      when the start button is clicked the simulation starts.
+      <br />
+      The most important part is how to implement a certain rule for the automaton (in this case the parity rule), and
+      how
+      to enforce the boundary conditions (in this case the periodic boundary condition).
+    </p>
+    <p>
+      To implement the parity rule, we need to sum up the states of the four neighbors, and then check if the sum is
+      even or odd.
+      <br />
+      At each iteration, every cell needs to be updated, so we need to save the new state of each cell in a temporary
+      grid. Then we can sum up the four neighbors of each cell and check the parity.
+      <br />
+      There are many ways to sum up the four neighbors, the best and the most efficient one is to use the modulo
+      operator. Doing so, not only we can sum up the neighbors, but we can also enforce the periodic boundary.
+    </p>
+    <!-- prettier-ignore -->
+    <pre>
+    <code>
+      for (let i = 0; i < gridVSize; i++) {
+        for (let j = 0; j < gridHSize; j++) {
+          iM = (i - 1) % gridVSize;
+          iP = (i + 1) % gridVSize;
+          jM = (j - 1) % gridHSize;
+          jP = (j + 1) % gridHSize;
+          grid[i][j].alive =
+            (gridCopy.at(iM).at(j).alive +
+              gridCopy.at(iP).at(j).alive +
+              gridCopy.at(i).at(jM).alive +
+              gridCopy.at(i).at(jP).alive) %
+            2;
+        }
+      }
+    </code>
+  </pre>
+    <p>
+      Here <code>gridVSize</code> and <code>girdHSize</code> are the vertical and horizontal size of the grid
+      respectively.
+      <br />
+      The modulo operator ensures that when the index equals the size of the grid, it will be set to 0, so back at the
+      start of the grid.
+      <br />
+      On the other hand, the Javascript <code>at</code> function is used to access the element at a certain index, if
+      the index is -1, it will be set to the last element.
+      <br />
+      This is how the periodic boundary condition is enforced.
+    </p>
+  </div>
+  <h3>The Parity Automaton</h3>
+  <div>
+    <p>
+      Let's take a look at the parity automaton in action. We will begin with a single cell alive approximately at the
+      middle of a 64x64 grid.
+    </p>
+    <p>The gif below shows the first 7 iterations of the parity rule</p>
+    <img src="media/cell.gif" />
+    <p>Despite the simplicity of the rule we can already see complex shapes forming, a shape that "copies" itself</p>
+    <p>
+      Let's see an example of a more complex initial state, take a look at this video.
+      the initial shape is somewhat triangular.
+    </p>
+    <div id="videoContainer">
+      <video width="100%" controls>
+        <source src="media/triangle.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <p>
+      We can see that the automaton generates the same shape multiples times in a different positions.
+      <br />
+      Pause at iteration 4, the triangular shape is reproduced, there are now 4 shapes instead of one.
+      <br />
+      At iteration 12, the triangular shape is reproduced again, now there are 16 shapes instead of 4.
+    </p>
+    <p>
+      At different iterations we can see intrecate patterns forming, this is the beauty of cellular automata,
+      we began with a simple rule and a simple initial state, and we ended up with complex patterns.
+    </p>
+    <p>
+      If you watched the video till the end, you would have noticed that at iteration 32, the grid is empty, all cells
+      are white. This is not an error, in fact this is the expected behavior of the parity rule given the grid size.
+    </p>
+  </div>
+
 </body>
 
 </html>
