@@ -20,23 +20,23 @@ weight: 10
 
 <body>
   <p>
-    In the 1940's, John Von Neumann and Stanislaw Ulam wanted to design a computer able to self-repair.
+    In the 1940s, John Von Neumann and Stanislaw Ulam wanted to design a computer able to self-repair.
     <br />
-    In the real world an object can be produced only from a more complex object, suppose you want to replicate a piece
+    In the real world an object can be produced only from a more complex object. Consider replicating a piece
     of paper. <br />
-    In order to create one you need to have a more complex object, a printer,
-    the printer is a much more complex system than the paper, and in order to create a printer, you need a lot of
+    To create one, we need to have a more complex object, a printer,
+    the printer is a much more complex system than paper, and to create a printer, we need a lot of
     smaller components which are themselves complex and so on.
     <br />
     However, this is not what happens in nature, cells are capable of self-replicating and self-repairing,
-    so, scientists contemplated the idea of creating a system that has such capabilities.
+    so scientists contemplated the idea of creating a system that has such capabilities.
   </p>
   <h2>
     Simplifiying the problem
   </h2>
   <div>
     <p>
-      Tackling such a problem is not easy, so scientists decided to simplify the problem. <br />
+      Tackling such a problem is hard, so scientists decided to simplify the problem. <br />
       <span class="highlight">
         How to find the logical mechanisms for self-reproduction?
       </span>
@@ -44,11 +44,11 @@ weight: 10
       Finding an algorithm to acheive transcription and translation would be a great start, it would also be easier to
       formalize these concepts in a descrete world.
       <br />
-      This is when the idea of cellular automata was born.
+      That's when the idea of cellular automata was born.
       <br />
       A cellular automata is a mathematical abstraction of the real world, a modeling framework in which everything is
       discrete.
-      There are many examples of cellular automata, in this blog we will be looking at two, both use a square
+      There are many examples of cellular automata, in this blog we will be looking at two that use a square
       lattice (a grid).
       <br />
       Although the square lattice is the most common, it is possible to use a hexagonal lattice, a triangular lattice or
@@ -60,16 +60,16 @@ weight: 10
   </div>
   <h2>The parity rule</h2>
   <p>
-    In the first example we will be looking at an automaton (i.e. a specific cellular automata) that uses the <b>parity
+    In the first example we will look at an automaton (i.e., a specific cellular automata) that uses the <b>parity
       rule</b>.
     <br />
     Here a cell has only two states, dead or alive (0 or 1), a dead cell is a white cell, an alive cell is a black cell.
     Each cell sums up the states of its four neighbors (up, down, left, right).
     <br />
-    If the sum is even, the new state of the cell is 0, otherwise it is 1.
+    If the sum is even, the new state of the cell is 0, otherwise, it is 1.
   </p>
   <p>
-    Each cell sums up the states of its four neighbors, you can see the neighboring cells in the image.
+    Each cell sums up the states of its four neighbors, we can see the neighboring cells in the image.
     These are the four white cells that have a black border.
   </p>
   <img src="./media/parity-rule.png" alt="can't load image" />
@@ -85,27 +85,28 @@ weight: 10
       <br />
       How do we handle the cells that don't have four neighbors?
       <br />
-      There are many ways to handle such cells, these are called boundary conditions, here are a few examples:
+      There are many ways to handle such cells (this is called boundary conditions) here are a few examples:
     </p>
     <ul>
-      <li>A fixed boundary condition, where the state of the cell is fixed (you choose a fixed cell as a neighbor)</li>
+      <li>A fixed boundary condition, an imaginary cell would exist with a permanent state</li>
       <li>Adiabatic, the same cell would be considered as a neighbor</li>
-      <li>Periodic, the cells on the edge are considered as neighbors of the cells on the other side of the grid</li>
+      <li>Periodic, the cells on the edge regarded as neighbors of the cells on the other side of the grid</li>
     </ul>
     <p>
       When applying the periodic boundary condition, the neighboring cells for the top left cell would be:
     </p>
     <ol>
-      <li>The next cell on the right</li>
-      <li>The next cell on the bottom</li>
-      <li>The cell on the bottom left (this is the north neighbour)</li>
-      <li>The cell on the top right (this is the west neighbour)</li>
+      <li>The next on the right</li>
+      <li>The next on the bottom</li>
+      <li>The bottom left cell (this is the north neighbour)</li>
+      <li>The top right cell (this is the west neighbour)</li>
     </ol>
     <p>
       In this blog we will be using the periodic boundary condition.
     </p>
     </p>
   </div>
+  <!-- TODO: continue spelling fixes here -->
   <h3>P5.js implementation</h3>
   <div>
     <p>
