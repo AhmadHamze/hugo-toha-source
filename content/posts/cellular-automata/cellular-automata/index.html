@@ -32,7 +32,7 @@ weight: 10
     so scientists contemplated the idea of creating a system that has such capabilities.
   </p>
   <h2>
-    Simplifiying the problem
+    Simplifying the problem
   </h2>
   <div>
     <p>
@@ -41,30 +41,30 @@ weight: 10
         How to find the logical mechanisms for self-reproduction?
       </span>
 
-      Finding an algorithm to acheive transcription and translation would be a great start, it would also be easier to
-      formalize these concepts in a descrete world.
+      Finding an algorithm to achieve transcription and translation would be a great start, it would also be easier to
+      formalize these concepts in a discrete world.
       <br />
       That's when the idea of cellular automata was born.
       <br />
-      A cellular automata is a mathematical abstraction of the real world, a modeling framework in which everything is
+      A cellular automaton is a mathematical abstraction of the real world, a modeling framework in which everything is
       discrete.
       There are many examples of cellular automata, in this blog we will be looking at two that use a square
       lattice (a grid).
       <br />
-      Although the square lattice is the most common, it is possible to use a hexagonal lattice, a triangular lattice or
-      even a three dimensional lattice (a cube).
+      Although the square lattice is the most common, it is possible to use a hexagonal lattice, a triangular lattice,
+      or
+      even a three-dimensional lattice (a cube).
       <br />
-      It is also possible to make a simpler automaton, for example, a one dimensional automaton.
-      Take a look at <a href="https://www.wolframalpha.com/input?i=rule+30" target="_blank">Wolfram's automata</a>.
+      It is also possible to make a simpler automaton, for example, a one-dimensional automaton.
+      Take a look at <a href="https://www.wolframalpha.com/input?i=rule+30" target="_blank">Wolfram's Automata</a>.
     </p>
   </div>
   <h2>The parity rule</h2>
   <p>
-    In the first example we will look at an automaton (i.e., a specific cellular automata) that uses the <b>parity
-      rule</b>.
+    In the first example, we will look at an automaton that uses the <b>parity rule</b>.
     <br />
-    Here a cell has only two states, dead or alive (0 or 1), a dead cell is a white cell, an alive cell is a black cell.
-    Each cell sums up the states of its four neighbors (up, down, left, right).
+    Here a cell has only two states, dead or alive (0 or 1), a dead cell is a white cell, and an alive cell is a black
+    cell. Each cell sums up the states of its four neighbors (up, down, left, right).
     <br />
     If the sum is even, the new state of the cell is 0, otherwise, it is 1.
   </p>
@@ -75,7 +75,7 @@ weight: 10
   <img src="./media/parity-rule.png" alt="can't load image" />
 
   <p>
-    If we start with only one cell alive, the next generation will look like so
+    If we start with only one cell alive, the next generation will look so
   </p>
   <img src="./media/parity-initial.png" alt="can't load image" />
   <h2>Boundary Conditions</h2>
@@ -88,9 +88,9 @@ weight: 10
       There are many ways to handle such cells (this is called boundary conditions) here are a few examples:
     </p>
     <ul>
-      <li>A fixed boundary condition, an imaginary cell would exist with a permanent state</li>
-      <li>Adiabatic, the same cell would be considered as a neighbor</li>
-      <li>Periodic, the cells on the edge regarded as neighbors of the cells on the other side of the grid</li>
+      <li>Fixed, an imaginary cell would exist with a permanent state</li>
+      <li>Adiabatic, the same cell would be considered a neighbor</li>
+      <li>Periodic, the cells on the edge are regarded as neighbors of the cells on the other side of the grid</li>
     </ul>
     <p>
       When applying the periodic boundary condition, the neighboring cells for the top left cell would be:
@@ -98,11 +98,11 @@ weight: 10
     <ol>
       <li>The next on the right</li>
       <li>The next on the bottom</li>
-      <li>The bottom left cell (this is the north neighbour)</li>
-      <li>The top right cell (this is the west neighbour)</li>
+      <li>The bottom left cell (this is the north neighbor)</li>
+      <li>The top right cell (this is the west neighbor)</li>
     </ol>
     <p>
-      In this blog we will be using the periodic boundary condition.
+      In this blog, we will be using the periodic boundary condition.
     </p>
     </p>
   </div>
@@ -110,11 +110,11 @@ weight: 10
   <h3>P5.js implementation</h3>
   <div>
     <p>
-      It is relatively easy to create a cellular automata in p5.js. You can take a look at the complete code
+      It is relatively easy to create a cellular automaton in p5.js. You can take a look at the complete code
       <a href="https://github.com/AhmadHamze/simple-simulations" target="_blank">here</a>.
       <br />
 
-      We have a grid of cells that saves the state of each cell, when one is clicked it its state is flipped,
+      We have a grid of cells that saves the state of each cell, when one is clicked its state is flipped, and
       when the start button is clicked the simulation starts.
       <br />
       The most important part is how to implement a certain rule for the automaton (in this case the parity rule), and
@@ -129,7 +129,7 @@ weight: 10
       grid. Then we can sum up the four neighbors of each cell and check the parity.
       <br />
       There are many ways to sum up the four neighbors, the best and the most efficient one is to use the modulo
-      operator. Doing so, not only we can sum up the neighbors, but we can also enforce the periodic boundary.
+      operator. By doing so, not only we can sum up the neighbors, but we can also enforce the periodic boundary.
     </p>
     <!-- prettier-ignore -->
     <pre>
@@ -151,7 +151,7 @@ weight: 10
     </code>
   </pre>
     <p>
-      Here <code>gridVSize</code> and <code>girdHSize</code> are the vertical and horizontal size of the grid
+      Here <code>gridVSize</code> and <code>girdHSize</code> are the vertical and horizontal sizes of the grid
       respectively.
       <br />
       The modulo operator ensures that when the index equals the size of the grid, it will be set to 0, so back at the
@@ -166,12 +166,12 @@ weight: 10
   <h3>The Parity Automaton</h3>
   <div>
     <p>
-      Let's take a look at the parity automaton in action. We will begin with a single cell alive approximately at the
+      Let's take a look at the parity automaton in action. We will begin with a single cell alive approximately in the
       middle of a 64x64 grid.
     </p>
     <p>The gif below shows the first 7 iterations of the parity rule</p>
     <img src="media/cell.gif" />
-    <p>Despite the simplicity of the rule we can already see complex shapes forming, a shape that "copies" itself</p>
+    <p>Despite the simplicity of the, rule we can already see complex shapes forming, a shape that "copies" itself</p>
     <p>
       Let's see an example of a more complex initial state, take a look at this video,
       the initial shape is somewhat triangular.
@@ -193,14 +193,15 @@ weight: 10
       we began with a simple rule and a simple initial state, and we ended up with complex patterns.
     </p>
     <p>
-      If you watched the video till the end, you would have noticed that at iteration 32, the grid is empty, all cells
-      are white. This is not an error, in fact this is the expected behavior of the parity rule given the grid size.
+      If you watched the video till the end, you would have noticed that at iteration 32, the grid is empty, and all
+      cells
+      are white. This is not an error, this is the expected behavior of the parity rule given the grid size.
     </p>
     <p>
-      We can mathematically prove that a cellular automata of size \( 2^k \) with periodic boundary conditions will
+      We can mathematically prove that a cellular automaton of size \( 2^k \) with periodic boundary conditions will
       reach a whole zero state at iteration \( 2 ^ {k - 1} \).
     </p>
-    <p>You can find a proof in this book
+    <p>You can find proof in this book
       <a href="https://www.cambridge.org/core/books/cellular-automata-modeling-of-physical-systems/4FCAFAFE90617620C3207FE8A31A8604"
         target="_blank">
         Cellular Automata Modeling of Physical Systems
@@ -222,10 +223,10 @@ weight: 10
       </video>
     </div>
   </div>
-  <h2>Conway's game of life </h2>
+  <h2>Conway's Game of Life </h2>
   <div>
     <p>
-      The most famous example of a cellular automaton is Conway's game of life. Unlike the parity automaton, the game
+      The most famous example of a cellular automaton is Conway's Game of Life. Unlike the parity automaton, the game
       of life has a more complex rule.
       <br />
       The affected cells when determining the state of a cell are the eight
@@ -235,20 +236,20 @@ weight: 10
     <p>
       The rule is as follows:
       <br />
-      If a cell is alive and has 2 or 3 alive neighbors, it stays alive, otherwise it dies.
+      If a cell is alive and has 2 or 3 alive neighbors, it stays alive, otherwise, it dies.
       <br />
-      If a cell is dead and has exactly 3 alive neighbors, it becomes alive, otherwise it stays dead.
+      If a cell is dead and has exactly 3 alive neighbors, it becomes alive, otherwise, it stays dead.
     </p>
     <p>
       The game of life has been studied and analyzed extensively, there is an online community of enthusiasts that
-      study the game of life, they have found many interesting patterns and shapes.
+      study the game of life, and they have found many interesting patterns and shapes.
       <br />
       Take a look at <a href="https://conwaylife.com/wiki/" target="_blank">LifeWiki</a>
     </p>
   </div>
   <h3>A universal computer</h3>
   <p>
-    Conway's game of life is a universal computer, this means that it can simulate any other computer.
+    Conway's Game of Life is a universal computer, which means that it can simulate any other computer.
     Think of any type of computation a computer can do, the game of life can do it too!
   </p>
   <p>
@@ -265,25 +266,26 @@ weight: 10
   </div>
   <p>
     This gun keeps creating gliders (in our case we have a small grid so the gliders will eventually hit the gun and
-    disturbe the process), we can use multiple gliders to build logic gates, and then use these gates to build
+    disturb the process), we can use multiple gliders to build logic gates, and then use these gates to build
     more complex circuits.
   </p>
   <p>
-    There are many mind blowing videos online showing some examples of what can be done with the game of life.
-    The fact that we can build a computer with something as simple as the game of life is a testament to the power
+    There are many mind-blowing videos online showing some examples of what can be done with the game of life.
+    The fact that we can build a computer with something as simple as the Game of Life is a testament to the power
     of cellular automata.
   </p>
   <h2>Application and implications</h2>
   <div>
     <p>
-      The examples we saw above are theoretical, but cellular automata can be used to model real world systems.
+      The examples we saw above are theoretical, but cellular automata can be used to model real-world systems.
       <br />
-      From simulating diffusion, to modeling the spread of diseases, spread of forest fire, growth model in physics,
-      fluid mechanics and many more, cellular automata is a powerful scientific tool.
+      From simulating diffusion to modeling the spread of diseases, the spread of forest fires, growth models in
+      physics,
+      fluid mechanics, and many more, cellular automata is a powerful scientific tool.
     </p>
     <p>
       Scientists have contemplated the implications of cellular automata, how could something so simple be able to
-      simulate real world phenomena?
+      simulate real-world phenomena?
       <br />
       What does that say about the nature of reality? How could a discrete world be able to simulate a continuous
       world?
