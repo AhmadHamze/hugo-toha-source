@@ -4,68 +4,85 @@ date: 2021-03-03
 description: Python code to estimate pi
 math: true
 menu:
-  sidebar:
-    name: Monte-Carlo Estimation of Pi
-    identifier: mc-pi
-    weight: 3
+sidebar:
+name: Monte-Carlo Estimation of Pi
+identifier: mc-pi
+parent: Mathematics-Blogs
+weight: 3
 ---
 
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <link href="styles.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
-        <script src="sketch.js"></script>
-    </head>
-    <body>
-        <div id="blogContainer">
-            
-            <h1>Using the Monte-Carlo simulation to estimate the value of &#x03C0;</h1>
-            <p>
-                First of all, let's talk briefly about what is a Monte-Carlo simulation.<br>
-                Simply put, it is a computational method that uses a large number of random samples to obtain a result. It is used in a
-                wide range of disciplines like mathematics, computer graphics, and physical sciences.
-                In this blog, we will see how we can use this method to estimate the value of the mathematical constant \( \pi \).
-            </p>
 
-            <!--If you put this header h3 inside the paragraph, css won't be able to identify the paragraph anymore!!!!-->
-            <h3>Concept</h3>
-            <p>
-                How can a large number of random samples be used to estimate \( \pi \)?<br>
-                Suppose we have a circle inscribed in a square, if we throw a pile of sand randomly on the square, some grains will end up
-                inside the circle and others will end up outside of it. The following animation illustrates this concept,
-                the blue dots represent the grains that are inside the circle and the red ones represent the ones outside of it.<br>
-                If you wait a few moments you will start to see a circle filled with blue dots (a blue disk) and the areas outside of it are filled with red dots.
-            </p>
-            <div id="canvas" script="sketch.js">
+<head>
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+</head>
 
-            </div>
-            <p>
-                We can compute the proportion of grains that ended up inside the circle, this value equals the proportion of the circle
-                to the square. Besides, the more grain of sands we throw onto the square the more accurate the estimation will be.<br>
-                But why is this true? The Monte-Carlo simulation is an example of the "Law of Large Numbers (LLN)", this is not the focus of this
-                blog, if you want to know more you can check this wikipedia article
-                <a href="https://en.wikipedia.org/wiki/Law_of_large_numbers" target="_blank" rel="noopener noreferrer">Law_of_large_numbers</a>.<br>
-                First, let's figure out what the proportion of the circle in relation to the square is.<br>
-                The area of the circle is \(\pi r^2\), on the other hand we will consider a unit square having an area of 1.<br>
-                Therefore the proportion we're looking for is \(\cfrac{\pi / 4}{1} = \dfrac{\pi}{4}\).<br>
-                The second value we're looking for is the proportion of the grains inside the circle. Denote \(success\) the number of these grains, and \(trials\)
-                the total number of grains thrown, so the proportion is \(success/trials\).<br>
-                Now, let's write the equation
-                $$ \dfrac{\pi}{4} = \dfrac{success}{trials} \Harr \pi = 4\cdot \dfrac{success}{trials} $$
-                There you go! What we have to do now is to simulate a lot of "trials" and see how many are "success" i.e. inside the circle.
+<body>
+    <div id="blogContainer">
 
-            </p>
-            <h3>Code</h3>
-            <p>
-                We will be creating an array containing many couples of variables representing the coordinates of each point (grain of sand),
-                then we calculate whether the point is within the disk or not, the disk center is \( (1/2, 1/2) \).<br>
-                Each point \( (x,y) \) is a bivariate uniform random variable on the unit square, \( (x,y) \in (0,1)^2 \)
-                and the disk is defined by:
-                $$ \Big\{(x,y) \in \R^2; \Big(x - \frac{1}{2}\Big)^2 + \Big(y - \frac{1}{2}\Big)^2 \leq \Big(\frac{1}{2}\Big)^2 \Big\}$$
-            </p>
-            <pre>
+        <h1>Using the Monte-Carlo simulation to estimate the value of &#x03C0;</h1>
+        <p>
+            First of all, let's talk briefly about what is a Monte-Carlo simulation.<br>
+            Simply put, it is a computational method that uses a large number of random samples to obtain a result. It
+            is used in a
+            wide range of disciplines like mathematics, computer graphics, and physical sciences.
+            In this blog, we will see how we can use this method to estimate the value of the mathematical constant \(
+            \pi \).
+        </p>
+
+        <!--If you put this header h3 inside the paragraph, css won't be able to identify the paragraph anymore!!!!-->
+        <h3>Concept</h3>
+        <p>
+            How can a large number of random samples be used to estimate \( \pi \)?<br>
+            Suppose we have a circle inscribed in a square, if we throw a pile of sand randomly on the square, some
+            grains will end up
+            inside the circle and others will end up outside of it. The following animation illustrates this concept,
+            the blue dots represent the grains that are inside the circle and the red ones represent the ones outside of
+            it.<br>
+            If you wait a few moments you will start to see a circle filled with blue dots (a blue disk) and the areas
+            outside of it are filled with red dots.
+        </p>
+        <div id="canvas" script="sketch.js">
+
+        </div>
+        <p>
+            We can compute the proportion of grains that ended up inside the circle, this value equals the proportion of
+            the circle
+            to the square. Besides, the more grain of sands we throw onto the square the more accurate the estimation
+            will be.<br>
+            But why is this true? The Monte-Carlo simulation is an example of the "Law of Large Numbers (LLN)", this is
+            not the focus of this
+            blog, if you want to know more you can check this wikipedia article
+            <a href="https://en.wikipedia.org/wiki/Law_of_large_numbers" target="_blank"
+                rel="noopener noreferrer">Law_of_large_numbers</a>.<br>
+            First, let's figure out what the proportion of the circle in relation to the square is.<br>
+            The area of the circle is \(\pi r^2\), on the other hand we will consider a unit square having an area of
+            1.<br>
+            Therefore the proportion we're looking for is \(\cfrac{\pi / 4}{1} = \dfrac{\pi}{4}\).<br>
+            The second value we're looking for is the proportion of the grains inside the circle. Denote \(success\) the
+            number of these grains, and \(trials\)
+            the total number of grains thrown, so the proportion is \(success/trials\).<br>
+            Now, let's write the equation
+            $$ \dfrac{\pi}{4} = \dfrac{success}{trials} \Harr \pi = 4\cdot \dfrac{success}{trials} $$
+            There you go! What we have to do now is to simulate a lot of "trials" and see how many are "success" i.e.
+            inside the circle.
+
+        </p>
+        <h3>Code</h3>
+        <p>
+            We will be creating an array containing many couples of variables representing the coordinates of each point
+            (grain of sand),
+            then we calculate whether the point is within the disk or not, the disk center is \( (1/2, 1/2) \).<br>
+            Each point \( (x,y) \) is a bivariate uniform random variable on the unit square, \( (x,y) \in (0,1)^2 \)
+            and the disk is defined by:
+            $$ \Big\{(x,y) \in \R^2; \Big(x - \frac{1}{2}\Big)^2 + \Big(y - \frac{1}{2}\Big)^2 \leq
+            \Big(\frac{1}{2}\Big)^2 \Big\}$$
+        </p>
+        <pre>
             <code>
             import numpy as np
 
@@ -75,33 +92,42 @@ menu:
                 return 4 * (success/trials)
             </code>
             </pre>
-            <p>
-                The code above defines a function "monte_carlo_pi" that takes the number of random trials to generate as argument.<br>
-                The "b_uniform" is a generator containing "trials" amount of random points all within the square. The "success" variable is
-                simply the number of points situated inside the circle. Finally the estimated value of \( \pi \) is returned.  
-            </p>
-            <h3>Results</h3>
-            <p>
-                We expect that the larger number of trials we use the better the estimation of \( \pi \) will be.<br>
-                Let's see the result when using only 100 trials.<br>
-                <img src="images/pie_100.png" alt="Card image cap"><br>
-                We got 3.0 as an estimation, this is quite far from the value that we're mostly used to (e.g. <mn>3.141592654<mn>), so let's
-                increase the number of trials to 100,000<br>
-                <img src="images/pie_100,000.png" alt="Card image cap"><br>
-                Now we're at 3.13976, much better. Finally, let's try 1,000,000 trials
-                <img src="images/pie_1,000,000.png" alt="Card image cap"><br>
-                The estimation got even closer, we're at 3.144164.
-            </p>
-            <h3>Conclusion</h3>
-            <p>
-                The Monte-Carlo method got a decent approximation of \( \pi \) when using 1,000,000 trials, so why not use even more trials?
-                How about 100 million? What about 100 billion?<br>
-                The theory states that the more trials we make the better the approximation, but there is a limit when using computers.<br>
-                Also, more trials will result in more computing time, 100 million trials will give an estimation of <mn>3.14144576</mn>.<br>
-                A better result, however, it took eight and a half minutes to complete.<br>
-                There are many ways to enhance the performance of our code, including using the Numba library and parallelization, this will be covered
-                in another blog.
-            </p>
-        </div>
-    </body>
+        <p>
+            The code above defines a function "monte_carlo_pi" that takes the number of random trials to generate as
+            argument.<br>
+            The "b_uniform" is a generator containing "trials" amount of random points all within the square. The
+            "success" variable is
+            simply the number of points situated inside the circle. Finally the estimated value of \( \pi \) is
+            returned.
+        </p>
+        <h3>Results</h3>
+        <p>
+            We expect that the larger number of trials we use the better the estimation of \( \pi \) will be.<br>
+            Let's see the result when using only 100 trials.<br>
+            <img src="images/pie_100.png" alt="Card image cap"><br>
+            We got 3.0 as an estimation, this is quite far from the value that we're mostly used to (e.g. <mn>
+                3.141592654<mn>), so let's
+                    increase the number of trials to 100,000<br>
+                    <img src="images/pie_100,000.png" alt="Card image cap"><br>
+                    Now we're at 3.13976, much better. Finally, let's try 1,000,000 trials
+                    <img src="images/pie_1,000,000.png" alt="Card image cap"><br>
+                    The estimation got even closer, we're at 3.144164.
+        </p>
+        <h3>Conclusion</h3>
+        <p>
+            The Monte-Carlo method got a decent approximation of \( \pi \) when using 1,000,000 trials, so why not use
+            even more trials?
+            How about 100 million? What about 100 billion?<br>
+            The theory states that the more trials we make the better the approximation, but there is a limit when using
+            computers.<br>
+            Also, more trials will result in more computing time, 100 million trials will give an estimation of <mn>
+                3.14144576</mn>.<br>
+            A better result, however, it took eight and a half minutes to complete.<br>
+            There are many ways to enhance the performance of our code, including using the Numba library and
+            parallelization, this will be covered
+            in another blog.
+        </p>
+    </div>
+</body>
+
 </html>

@@ -6,6 +6,7 @@ menu:
   sidebar:
     name: Simple C++ matrix calculation
     identifier: Simple-C++-Matrix
+    parent: Mathematics-Blogs
     weight: 10
 ---
 
