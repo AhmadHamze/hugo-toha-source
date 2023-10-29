@@ -18,8 +18,21 @@ Similarly, when we spray perfume in a room, the perfume particles diffuse throug
 
 ## Mathematical model of diffusion
 
-Let's start by defining our problem mathematically, we will use a method known as descritization to model our problem. 
+Let's start by defining our problem mathematically, we will use a method known as descritization to model our problem.
 
-<!-- <p>
-    \( 2^{k + 1} \)
-</p> -->
+Our world will be a two dimensional grid, particles exist inside the grid, and can move in four directions, up, down, left and right.
+The particles will move in discrete time steps, at each time step, a particle can move in any of the four directions with equal probability, there is also the probability that the particle will stay in its current place without moving.
+We will also assume that the particles cannot move outside the grid.
+
+This picture gives us a visual representation of our model.
+
+![Grid](./images/grid.png)
+<p>
+We track the walker (represented by the red dot) as it moves through the grid, during a time incrementation \( \Delta_t \), it has an equal chance of moving in any of the four directions (the blue arrows), or staying in its current position.
+</p>
+<p>
+Therefore the probability of the walker moving in any direction is \( \frac{1}{5} \), and the probability of the walker staying in its current position is also \( \frac{1}{5} \).
+</p>
+<p>
+The grid being square, we can assume that \( \Delta_x = \Delta_y \), so at each time step \( \Delta_t \), the walker may move a distance \( \Delta_x \).
+</p>
