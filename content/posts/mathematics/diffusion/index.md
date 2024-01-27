@@ -11,7 +11,7 @@ menu:
     weight: 1
 ---
 
-Randomness is an interesting concept, we have seen in previous blogs how it can be harnessed to compute mathematical constants, and even create a universal computer. In this blog we will see how randomness can be used to model diffusion.
+Randomness is an interesting concept, we have seen in previous blogs how it can be harnessed to [compute mathematical constants](https://ahmadhamze.github.io/posts/estimating-pi/) , and even create a [universal computer](https://ahmadhamze.github.io/posts/cellular-automata/cellular-automata/). In this blog we will see how randomness can be used to model diffusion.
 Diffusion can be defined as the movement of particles from a region of higher concentration to a region of lower concentration.
 This is a common phenomenon, and can be observed in our daily lives. For example, when we add sugar to a cup of tea, the sugar particles diffuse throughout the tea.
 In this blog we will see how we can model diffusion using random walks.
@@ -20,13 +20,14 @@ In this blog we will see how we can model diffusion using random walks.
 
 Let's start by defining our problem mathematically, we will use a method known as descritization to model our problem.
 
-Our world will be a two dimensional grid, particles exist inside the grid, and can move in four directions, up, down, left and right.
+Our world will be a two dimensional grid, particles exist inside the grid, and can move in four directions, up, down, left and right. We will assume that the particles cannot move outside the grid.
 
-We will assume that the particles cannot move outside the grid.
+This picture illustrates the model.
 
-This picture gives us a visual representation of our model.
+<div align="center">
+<img src="./images/grid.png" alt="grid-image" />
+</div>
 
-![Grid](./images/grid.png)
 <p>
 We track the walker (represented by the red dot) as it moves through the grid. During a time incrementation \( \Delta_t \), it has an equal chance of moving in any of the four directions (the blue arrows), or staying in its current position.
 </p>
@@ -37,7 +38,7 @@ Therefore the probability of the walker moving in any direction is \( \frac{1}{5
 The grid being square, we can assume that \( \Delta_x = \Delta_y \), so at each time step \( \Delta_t \), the walker may move a distance \( \Delta_x \).
 </p>
 <p>
- The position of a particle at a given time \( t \) is \( \left(x(t), y(t)\right) \), to find the position of the particle at time \( t + \Delta_t \), we can use the following equation:
+ The position of a particle at a given time \( t \) is \( \left(x(t), y(t)\right) \), to find the position of the particle at time \( t + \Delta_t \), we can use the following equations:
 </p>
 <div align="center">
   <p>
@@ -48,11 +49,11 @@ The grid being square, we can assume that \( \Delta_x = \Delta_y \), so at each 
   </p>
 </div>
 <p>
-This equation is basically stating that in order to find the particle's position at time \( t + \Delta_t \), we need to add the distance it has moved in the time interval \( \Delta_t \) to its position at time \( t \).
-</p>
-<p>
 The distance the particle has moved in the time interval \( \Delta_t \) is given by \( \Delta_t \cdot v_x(t) \), where 
 \( v_x(t) \) is the velocity of the particle at time \( t \) (same for \( y \)).
+</p>
+<p>
+This equation is basically stating that in order to find the particle's position at time \( t + \Delta_t \), we need to add the distance it has moved in the time interval \( \Delta_t \) to its position at time \( t \).
 </p>
 <p>
 \(v_x, v_y \) is chosen randomly from the following set
@@ -62,4 +63,15 @@ The distance the particle has moved in the time interval \( \Delta_t \) is given
 </p>
 <p>
 This covers the cases when the particle moves right, left, stay in position, up, and down respectively.
+</p>
+<p>
+Using this model, and with some math, we can prove that on average, after some time, the position of a random walker is the same as its starting position. In addition, the average displacement of the walker is \( d = \sqrt{4 D \cdot t} \) where \( D \) is a constant called the diffusion coefficient, and \( t \) is the time.
+
+This is equivalent to the following equation
+</p>
+<p align="center">
+\( \partial _t \rho(x, y, t) = D(\partial^2_x + \partial^2_y)\rho(x, y, t) \)
+</p>
+<p>
+This is the famous diffusion equation, which is a partial differential equation that describes the time evolution of a density function \( \rho(x, y, t) \).
 </p>
