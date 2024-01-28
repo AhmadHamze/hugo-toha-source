@@ -11,10 +11,10 @@ menu:
     weight: 1
 ---
 
-Randomness is an interesting concept, we have seen in previous blogs how it can be harnessed to [compute mathematical constants](https://ahmadhamze.github.io/posts/estimating-pi/) , and even create a [universal computer](https://ahmadhamze.github.io/posts/cellular-automata/cellular-automata/). In this blog we will see how randomness can be used to model diffusion.
+Randomness is an interesting concept, we have seen in previous blogs how it can be harnessed to [compute mathematical constants](https://ahmadhamze.github.io/posts/estimating-pi/), and even create a [universal computer](https://ahmadhamze.github.io/posts/cellular-automata/cellular-automata/). In this blog we will see how randomness can be used to model diffusion.
 Diffusion can be defined as the movement of particles from a region of higher concentration to a region of lower concentration.
 This is a common phenomenon and can be observed in our daily lives. Heat transfer is a form of diffusion, when you heat a metal rod at one end, the heat will diffuse through the rod until it reaches the other end.
-In this blog we will see how we can model diffusion using random walks.
+We will see how we can model diffusion using random walks.
 
 ## Mathematical model of diffusion
 
@@ -265,3 +265,5 @@ Why does this work? Scientists still speculate this question, when it comes to t
 The physical particles in the diffusion equation go back to their initial position after some time, this is the same for the random walker, on average, the walker goes back to its initial position after some time.
 
 We just saw a discrete model simulating a continuous phenomenon, this is a common theme in simulation, many real world phenomena can be modeled using discrete models.
+
+> You can find the code for the simulation [here](https://github.com/AhmadHamze/simple-simulations)
