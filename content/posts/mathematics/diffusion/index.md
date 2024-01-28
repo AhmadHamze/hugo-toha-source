@@ -13,14 +13,14 @@ menu:
 
 Randomness is an interesting concept, we have seen in previous blogs how it can be harnessed to [compute mathematical constants](https://ahmadhamze.github.io/posts/estimating-pi/) , and even create a [universal computer](https://ahmadhamze.github.io/posts/cellular-automata/cellular-automata/). In this blog we will see how randomness can be used to model diffusion.
 Diffusion can be defined as the movement of particles from a region of higher concentration to a region of lower concentration.
-This is a common phenomenon, and can be observed in our daily lives. Heat transfer is a form of diffusion, when you heat a metal rod at one end, the heat will diffuse through the rod until it reaches the other end.
+This is a common phenomenon and can be observed in our daily lives. Heat transfer is a form of diffusion, when you heat a metal rod at one end, the heat will diffuse through the rod until it reaches the other end.
 In this blog we will see how we can model diffusion using random walks.
 
 ## Mathematical model of diffusion
 
 Let's start by defining our problem mathematically, we will use a method known as descritization to model our problem.
 
-Our world will be a two dimensional grid, particles exist inside the grid, and can move in four directions, up, down, left and right. We will assume that the particles cannot move outside the grid.
+Our world will be a two dimensional grid, particles exist inside the grid and can move in four directions: up, down, left and right. We will assume that the particles cannot move outside the grid.
 
 This picture illustrates the model.
 
@@ -223,3 +223,45 @@ function draw() {
   }
 }
 ```
+
+### Result
+
+This simulation takes some time to run, just like the Monte Carlo simulation, the more iterations you run, the better the result will be.
+
+After one thousand iterations, this is the result
+
+<div align="center">
+<img src="./images/1000.png" alt="1000 iterations" />
+</div>
+
+We can't see much going on here, all what we see is a bunch of blue cells. Let's run the simulation for 10000 iterations.
+
+<div align="center">
+<img src="./images/10000.png" alt="1000 iterations" />
+</div>
+
+Still not much, but we can see two colors now, blue and green. Let's run the simulation for 22000 iterations.
+
+<div align="center">
+<img src="./images/22000.png" alt="1000 iterations" />
+</div>
+
+This is more like it! We can see a disc with a red center and a blue edge, green cells form a circle around the red center.
+
+At 41000 iterations, the red disc is more defined and takes more space. we can also see different shades of red, the cells closer to the center have a stronger red color than those farther away. The green cells still form a disc around the red center.
+
+<div align="center">
+<img src="./images/41000.png" alt="1000 iterations" />
+</div>
+
+This image is quite similar to the analytical solution we have seen above.
+
+## Conclusion
+
+The natural phenomena of diffusion can be modeled using random walks, this is a simple model that can be implemented in not too many lines of code. The results are very similar to the analytical solution of the diffusion equation.
+
+Why does this work? Scientists still speculate this question, when it comes to the diffusion case, there are two similar behaviors between the random walk model and the diffusion equation.
+
+The physical particles in the diffusion equation go back to their initial position after some time, this is the same for the random walker, on average, the walker goes back to its initial position after some time.
+
+We just saw a discrete model simulating a continuous phenomenon, this is a common theme in simulation, many real world phenomena can be modeled using discrete models.
