@@ -15,6 +15,10 @@ skills:
   logo: "/images/react-logo.jpg"
   summary: "Experienced in React development, I mostly use Typescript"
 
+- name: Frontend Development
+  logo: "/images/frontend-dev.png"
+  summary: "Experienced in frontend development, I can use different UI libraries including Material UI, Taliwind, Styled components and Shadcn"
+
 - name: Git
   logo: "/images/Git-Icon.png"
   summary: "Experienced in Git development, mostly use Github."

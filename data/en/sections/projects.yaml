@@ -6,34 +6,34 @@ section:
   showOnNavbar: True
 
 projects:
-  - name: "Earthquakes"
-    logo: /images/earthquakes.png
-    repo: https://github.com/AhmadHamze/Earthquakes-
-    summary: A Processing program that maps the locations of 2000 earthquakes that occured between the years 2000 and 2012. The top three earthquakes by magnitude are mapped using a red circle, you can see the name of the locations displayed on the map as well as the value of the magnitude.
-    tags: ["Python", "Processing"]
-
-  - name: "Trivia Quizz"
-    repo: https://github.com/AhmadHamze/Trivia-Quizz-React
-    summary: A React typescript program that fetches 10 trivia questions from an API, the program displays each question for the user alongside 4 different answers where only one is correct. A score is displayed and a simple navigation system is provided, the game can be repeated after completion. This project uses storybook.
-    tags: ["React", "Typecript", "Storybook"]
-  
-  - name: "Simple Matrix Calculator"
-    repo: https://github.com/AhmadHamze/Small-Matrix
-    summary: This program is a console application that can add, multiply and invert 2 by 2 and 3 by 3 real matrices. It has error checking and it keeps runnig until the user quits.
-    tags: ["C++"]
-
   - name: "Live Pictionary"
     repo: https://github.com/AhmadHamze/pictionary
     summary: A live pictionary using websockets and P5.js
     tags: ["Node.js", "P5.js", Websockets]
+
+  - name: "Earthquakes"
+    logo: /images/earthquakes.png
+    repo: https://github.com/AhmadHamze/Earthquakes-
+    summary: A Processing program that maps the locations of 2000 earthquakes that occured between the years 2000 and 2012
+    tags: ["Python", "Processing"]
 
   - name: "React Trivia Quiz"
     repo: https://github.com/AhmadHamze/Trivia-Quizz-React
     summary: A React Trivia Quiz using Typescript and Storybook
     tags: ["React", "Typescript", "Storybook"]
 
+  - name: "Simple Simulations"
+    repo: https://github.com/AhmadHamze/simple-simulations
+    summary: simulations using P5.js
+    tags: ["P5.js", "Javascript"]
+
   - name: "Typing Speed of Selenium"
     repo: https://github.com/AhmadHamze/selenium-typingspeed
     summary: A program that automates the typing speed test with Selenium
     tags: ["Selenium", "Python", "requests-html"]
+
+  - name: "Simple Matrix Calculator"
+    repo: https://github.com/AhmadHamze/Small-Matrix
+    summary: This program is a console application that can add, multiply and invert 2 by 2 and 3 by 3 real matrices. It has error checking and it keeps runnig until the user quits.
+    tags: ["C++"]
 
