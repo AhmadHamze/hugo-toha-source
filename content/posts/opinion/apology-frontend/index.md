@@ -46,5 +46,23 @@ That was it, I was done with frontend, and went back to what I was doing before.
 
 ## Second encounter
 
-After more than a year, I just had finished a role in AI and was looking for a new job. A group of friends told me that they are working on a project and they need a React developer. My lack of skills (non-existent at the moment) was not a problem for them, after all, the groups dedication will make or break the project.
+After more than a year, I just had finished a role in AI and was looking for a new job. A group of friends told me that they are working on a project and they need a React developer.
+My lack of skills (non-existent at the moment) was not a problem for them, after all, the group's dedication will make or break the project.
 
+So, here I am working with React! It was different than what I expected, because we were using Material UI, I didn't have to write a lot of css, and the jsx part was copied and pasted.
+
+I spent most of the time handling the state, passing props, using hooks, and creating typescript interfaces.
+I was enjoying what I was doing, it wasn't boring, and most importantly it wasn't easy!
+
+After not that long, the project was finished, I had a new perception of what frontend developers do, however, I still thought that at least when it comes to html and css, it's not that valuable of a thing.
+
+### Working with the experts
+
+Fast forward a few months, I am working as a full-stack developer with React in the frontend. The difference this time was the team, I was working with frontend developers who were experts in their field.
+
+Unlike my first experience with React, out of the box components were not enough, they either needed a lot of customization or we needed to build components from scratch.
+
+Building context menus and tooltips was very hard! Tooltips just don't work like you want them all the time. You always find cases where your tooltip don't show up, or it shows up in the wrong place, or it shows up but it's not styled correctly.
+
+And context menus? Handling their position, their visibility, their content, and their animations was a nightmare!
+I found myself struggling between building from scratch or customizing pre-existing components. The code was just getting harder and longer and the components were not behaving as they should.
