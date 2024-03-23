@@ -76,9 +76,23 @@ What about the performance? How will it behave in different screen sizes? How do
 
 > Side note here, unlike when you are doing a leet code problem, edge cases in frontend development are not just about the input, it's much more complicated.
 
-And bebugging? In the frontend, this is a completely different game, it's not just about inserting a breakpoint and checking the values of the variables.
+It took me a while to figure it out, but yes, it matters how the buttons on the screen are placed, the colors matters, the tooltips, the menus, the tables, the modals, the forms, the responsiveness, it all matters.
+
+If you can't do html and css, you can't do any of the above and that's a big problem.
+
+### Debugging
+
+Senior frontend engineers almost always have the devtools opened when working.
+
+In frontend, debugging is a completely different game, it's not just about inserting a breakpoint and checking the values of the variables.
 The browser has an extensive set of tools that you need to know how to use. If you do that, you can debugg the css, the html, the javascript, the network, the performance, and much more.
 
-With the devtools, you can find out why your page is so laggy, is there any components rendering for apparently no reason? Are there any network requests that are taking too long?
+With the devtools, you can find out why your page is so laggy, is there any components rendering when they should not? Are there any network requests that are taking too long?
 
-Fixing your app's performance starts with the devtools, this is a skill that I didn't know I needed until I started working with frontend developers.
+This is another aspect of frontend development that makes it special. When you keep you eyes on the devtools, css just becomes much easier. Instead of making changes and refreshing the page, you can just do it live, and see the changes immediately.
+
+When building something feels more comfortable, the task becomes more enjoyable. This made all the difference for me, I started to enjoy css more because of the devtools.
+
+### The apology
+
+Dear frontend developers, I am sorry that I underestimated your work. I am sorry that I thought that what you do is not real programming. I know better now, and I hope that you will accept me among you.
