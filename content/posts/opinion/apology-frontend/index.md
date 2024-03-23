@@ -93,6 +93,21 @@ This is another aspect of front-end development that makes it special. When you 
 
 When building something feels more comfortable, the task becomes more enjoyable. This made all the difference for me, I started to enjoy CSS more because of the devtools.
 
-### The apology
+## Why did I have such a bad perception of front-end development?
+
+I think that front-end development is not advertised correctly by front-end developers themselves.
+
+Everyone seems to be talking about Python, AI, Machine Learning, and Big Data. You just don't hear a lot about the front-end.
+When web development is discussed, it's mostly about the back-end, and the front-end is just a side note.
+
+When it does get discussed, it's mostly about the frameworks and the libraries, the difficulties and the challenges are not talked about much.
+
+Also, when you learn programming, you start by learning the basics, that is the logic, the data structures, and the algorithms. At this point, you aim to become good at leet code style problems, and you might end up making the mistake of thinking that this is what matters.
+
+> With the advancement of AI, leet code style problems are getting less important
+
+When you start learning the front-end, you start with HTML, it is much different than what you're used to and it might discourage you from learning more. You end up having this distorted view of what front-end development is.
+
+## The apology
 
 Dear front-end developers, I am sorry that I underestimated your work. I am sorry that I thought that what you do is not real programming. I know better now, and I hope that you will accept me among you.
