@@ -56,14 +56,14 @@ Here are some suggestions to avoid it:
 
 Here I am at the new job, my first impression is "it is so different from the old job". I am not saying it's better or worse, it's just different.
 
-I am back to a small team, however, unlike before, there are much less pull requests and each of them spend a lot of time getting reviewed. Almost, nothing gets merged unless changes are request a few times at least.
+I am back to a small team, however, unlike before, there are much less pull requests and each one of them spends a lot of time getting reviewed.
+Almost, nothing gets merged unless changes are requested a few times at least.
 
 Reviews are not just about the code, what kind of types you added, the components, or the functions you wrote, it's also about the design, the architecture, and the best practices.
 
 Why do you add a file? Why did you name it such? Why is it in this folder not the other? Why didn't you refactor the code before adding this feature? Why didn't you write tests for this? And much more.
 
 Be prepared to answer these questions, and be prepared to get back to your old branch from two weeks ago because it turns out it is not done yet.
-
 Oh, and the daily standups, no such thing anymore, this doesn't mean that you can relax and do whatever you want, it means that you have to be more responsible and more independent.
 
 When a meeting comes, you have to know what to say and what not to say, you have to be prepared before coming into the meeting, both in terms of what you want to say, and what you want to hear.
@@ -79,7 +79,7 @@ We are using Figma, and it's a great tool, It serves well as a communication too
 
 ## Tech stacks
 
-I used to work with React and Django, before moving into the new job I knew that I will be working with React Native and NodeJS.
+I used to work with React and Django, before moving into the new job, I knew that I will be working with React Native and NodeJS.
 I was worried for a few days before starting because I didn't have the time to prepare, I had a very brief introduction to React Native and NodeJS, and I was expected to contribute to the project from day one.
 
 Once I started working, I was relieved, React Native is really just React for the most part, the things that are special to React Native are not needed in most cases, so it feels you're just doing React with a slight difference in syntax.
@@ -89,3 +89,33 @@ I didn't know how simple Django is until I started working with Node.
 The main difficulty is that you have to think about SQL queries when working with Node, Django abstracts the SQL part for you, and you don't have to worry about it.
 
 Sure, you can write SQL with Django if you want to, but I never had to do it before, and that is a proof of how good Django is.
+
+Fundumentally, changing the tech stack didn't feel like a big deal, I realized that I can learn any tech stack in a few weeks.
+I am hoping that this is a sign of "growing up" as a developer, I don't need to watch tutorials anymore, I can just figure things out on my own and learn from the documentation directly, AI also helps alot obviously.
+I couldn't do that before, so I guess I am improving.
+
+### Building the app
+
+That being said, a major difference between working with React and React Native isn't related to coding at all, it's about the environment.
+
+You are not running React Native in a browser, you're supposed to run it on a mobile device, which can be an Android or an iOS device.
+I don't use a Mac, so I had to use an Android emulator to emulate an actual device, this was new groud to me.
+
+You have to build the app and install it on the emulator, to build it we use a tool called Gradle. 
+A lot can go wrong when building the app, incompatible libraries, missing dependencies, and much more.
+I had to spend the first few days just trying to build the app, I eventually succeded but it was a painful process.
+
+Many accidents happened later, whenever a big change is made, I have to build the app again, and I have to make sure that it works on both Android and iOS.
+With time I became more comfortable with the process, but it still causes anxiety whenever I have to do it.
+
+Debugging is another subject that feels different, the browser is just easier to use for that purpose.
+React Native does offer ways to debug the app, but it's not as good as the browser, and it's not as easy to use.
+
+## Final thoughts
+
+Enjoy the moment whatever it is, and remember whatever you're doing, there will be a time when you do it for the last time, and it might happen suddenly.
+So just enjoy the ride and don't stress too much about what's going to happen, change is coming for better or worse.
+
+Try your best to adapt to changes, keep learning and explore new domains, you never know what you might find interesting.
+
+That's it for today, let's hope I won't take another long pause before writing another post.
