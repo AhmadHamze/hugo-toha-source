@@ -7,9 +7,6 @@ section:
   template: sections/about.html
 
 designation: Full Stack developer
-company:
-  name: Endla
-  url: https://endla.com/
 
 resume: "files/CV_Ahmad_Hamze.pdf"
 
