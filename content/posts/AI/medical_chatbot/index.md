@@ -12,24 +12,24 @@ menu:
 
 A few years ago, when I started delving deeper into programming, AI was one of the main topics that captivated my interest.
 
-It was only natural for me to stumble upon this subject, since I was drawn into scientific programming and Python. Back in the day,
-AI wasn't the hype as it is today, most importantly, when it was mentioned to the public, it was associated with different domains, not just LLMs as it is today.
+It was only natural for me to stumble upon this subject since I was drawn to scientific programming and Python. Back in the day,
+AI wasn't the hype as it is today. Most importantly, when it was discussed, it was associated with different domains, not just LLMs as it is today.
 
-Most people at some point of their lives tried to play chess with a computer, this was (and still is) a great example of AI.
+Most people at some point in their lives tried to play chess with a computer, this was (and still is) a great example of AI.
 Chess engines do not "memorize" every single possible move, but they are able to calculate the best possible move based on the current state of the game.
-Many other example of AI existed, we had image classification, object detection, recommender systems, etc.
+There are many other examples of AI, E.g. image classification, object detection, recommender systems, etc.
 
-One form of AI which was not so popular was Natural Language Processing (NLP), I remember using some NLP systems a few years ago, and they were quite impressive, they could answer questions, they could translate text, and they could even tell you how is the person writing the text feeling.
+One form of AI that was not so popular was Natural Language Processing (NLP), I remember using some NLP systems a few years ago, and they were impressive, they could answer questions, they could translate text, and they could even tell the sentiment of a text.
 
 ## Here comes ChatGPT
 
 On November 30, 2022, OpenAI released ChatGPT, a chatbot that was able to answer questions in a conversational way.
 It took the world by storm, including my own software development "bubble", I would ask ChatGPT to build a React component, and it
-would actually do it correctly!
+would do it correctly!
 
-A few months later, I have something called GitHub Copilot, which was able to suggest code while I was writing it in VSCode.
+A few months later, I had GitHub Copilot, which was able to suggest code while I was writing it in VSCode.
 
-The past two years saw incredible advancements and changes in software development and AI. There are now countless AI tools, there are AI agents, Vibe coding is a thing, lots of courses about "prompt engineering", and so on.
+The past two years saw incredible advancements and changes in software development and AI. There are now countless AI tools, and AI agents, lots of courses about "prompt engineering", and vibe coding is a thing.
 
 ## Using an LLM to create something
 
@@ -37,7 +37,7 @@ Naturally, I wanted to create something using an LLM, after all, everyone is tal
 
 To be fair, I couldn't come up with an original idea, everyone seems to be doing the same thing, that is building chatbots using an API for an LLM.
 
-These chatbots basically use a context which might not be available for the LLM, use a combination of tools to find relevant context in a quick and efficient way, and finally utilize the LLM to generate a response based on the context and the question asked by the user.
+These chatbots basically use a context that might not be available for the LLM, use a combination of tools to find relevant context in a quick and efficient way, and finally utilize the LLM to generate a response based on the context and the question asked by the user.
 
 One useful method to create chatbots is called RAG which stands for Retrieval-Augmented Generation, it adds new information to the LLM instead of randomly dumping data in the context-window, making it more efficient.
 Giving an LLM context about something decreases the chances of "hallucination", which is a term used to describe the fact that LLMs are not always correct, and they can generate false information.
@@ -54,7 +54,7 @@ RAG is created in four steps:
 Googling something about your health is probably not the best idea, Google has the habit of telling you that you have cancer when you have a headache.
 LLMs are probably not better than Google, after all, they got their information from the internet, however, suppose you do have an extensive dataset of medical information that is approved by doctors, why not use this data to create a medical chatbot?
 
-Right from the beginning, you can see that one of the hardest parts is to actually find such a dataset, medical information can be found in PDF files, books, online, etc. More importantly, the data can be textual, visual images, videos, etc.
+Right from the beginning, you can see that one of the hardest parts is to actually find such a dataset, medical information can be found in PDF files, books, online, etc. More importantly, the data can be textual, images, videos, etc.
 
 Lucky for me, I am not building a serious medical application, so I ended up using a simple dataset from Hugging Face, which is a collection of medical questions and answers.
 You can find the dataset [here](https://huggingface.co/datasets/ruslanmv/ai-medical-chatbot).
@@ -85,7 +85,7 @@ What this basically does is that it converts sentences into multi-dimensional ve
 
 #### Using a GPU
 
-It is best to use a GPU for this task, since it is much faster than using a CPU. You can use Google Colab or any other cloud service to get access to a GPU.
+It is best to use a GPU for this task since it is much faster than using a CPU. You can use Google Colab or any other cloud service to get access to a GPU.
 The downloadable dataset size is 142 MB, it gets larger when you load it into memory, but still, this is not considered big in any way.
 On my very humble normal computer, the CPU would take one and a half hours to process the dataset, while the GPU on Google Colab took only 10 minutes.
 
@@ -114,7 +114,7 @@ question_embeddings = embed_model.encode(
 np.save('question_embeddings_gpu.npy', question_embeddings)
 ```
 
-Once you have the embeddings file, you can download it and use it in your local machine, or you can just run the code on Google Colab and use it there.
+Once you have the embeddings file, you can download it and use it on your local machine, or you can just run the code on Google Colab and use it there.
 
 > Note: do not download the file directly from Colab, instead, copy it to Google Drive and download it from there, it is much faster.
 
@@ -152,14 +152,14 @@ def retrieve_context(user_query, top_k=3):
 
 ### Generation
 
-This is the final step, all what we need to do here is use an LLM to generate a response based on the context we retrieved in the previous step.
+This is the final step, all we need to do here is use an LLM to generate a response based on the context we retrieved in the previous step.
 
-The code is simple, I will not be putting it here, however, you should know that you have to specify to the model that you don't want it to use its knowledge to answer you questions. Only use the context that you provided, this is important because without it you won't even notice that the context is used.
+The code is simple, I will not be putting it here, however, you should know that you have to specify to the model that you don't want it to use its knowledge to answer your questions. Only use the context that you provided, this is important because without it you won't even notice that the context is used.
 
-Finally, I used gradio to create a UI for the chatbot, you can find the complete code on this [repo](https://github.com/AhmadHamze/Q-A-Chatbot), do check it out.
+Finally, I used `gradio` to create a UI for the chatbot, you can find the complete code on this [repo](https://github.com/AhmadHamze/Q-A-Chatbot), do check it out.
 
 ## Conclusion
 
 This is a simple example of how to create a medical chatbot using RAG. The code is not perfect, and it can be improved in many ways, LangChain is a great library that can help you with this task, and it is worth checking out.
 
-The dataset can be improved, think about adding images, videos, and other types of data. You can also use a more complex model to encode the questions, or even use a different model for each type of data.
+The dataset can be improved, images, videos, and other types of data can be added. You can also use a more complex model to encode the questions, or even use a different model for each type of data.
