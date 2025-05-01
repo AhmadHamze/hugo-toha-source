@@ -1,6 +1,6 @@
 ---
-title: "RAG Chatbot: Vector Database"
-date: 2025-04-30
+title: "RAG Chatbot: Vector Database Approach"
+date: 2025-05-01
 description: A RAG chatbot using Qdrant and FastAPI
 menu:
   sidebar:
@@ -12,25 +12,27 @@ menu:
 
 In a [previous blog](https://ahmadhamze.github.io/posts/ai/medical_chatbot/), I wrote about a RAG chatbot that I created using a dataset of medical questions and answers.
 
-The RAG chatbot was embedding the user's question and retrieving the most relevant answers from an embeddings file, then GPT-4o-mini was used to generate the final answer using the retrieved answers.
+The RAG chatbot embedded the user’s question and retrieved the most relevant answers from an embedding file. Then, using the retrieved answers, GPT-4o-mini generated the final answer.
 
-In this blog, I will get rid of the embeddings file and use a vector database instead, also, the code will be repurposed into being smaller in size in order to deploy the chatbot using Docker and AWS.
+In this blog, we will get rid of the embedding file and use a vector database instead, the code will be repurposed to be smaller in size in order to deploy the chatbot using Docker and AWS.
+
+> The code is available on [GitHub](https://github.com/AhmadHamze/Q-A-Chatbot)
 
 ### Why Vector Database?
 
-Initially, I wanted to deploy the chatbot using the embeddings file, but I realized that this method is not scalable. The size of the file can get huge which means that retrieval will be slow and packaging the app will require more space.
+Initially, I wanted to deploy the chatbot using the embedding file, but I realized this method is not scalable. The size of the file can get huge which means that retrieval will be slow and packaging the app will require more space.
 
-Therefore, I decided to use a vector database instead, there are many options available, I chose [Qdrant](https://qdrant.tech/) because it is easy to use and has a free tier that is sufficient for experimental purposes.
+Therefore, I decided to use a vector database instead, I chose [Qdrant](https://qdrant.tech/) among the many available options because it is easy to use and has a free tier that is sufficient for experimental purposes.
 
 ## Building the Vector Database
 
-In this section, I will redo what we did in the previous blog, but with a twist. We will not only embed the questions, but also the answers (more on that later), and instead of saving the embeddings to a file, we will save them to a Qdrant database.
+In this section, we will redo what we did in the previous blog, but with a twist. Not only embed the questions, but also the answers (more on that later), and instead of saving the embeddings to a file, we will save them to a Qdrant database.
 
 > It is possible to run Qdrant locally using Docker, but I decided to use the hosted version instead.
 
 After creating an account, you can create an API key to be able to connect to the database.
 
-First, we need to initialize the Qdrant client:
+First, we need to initialize the Qdrant client
 
 ```python
 from qdrant_client import QdrantClient
@@ -47,7 +49,7 @@ client = QdrantClient(
     api_key=QDRANT_API_KEY,
 )
 ```
-> Notice that the code is supposed to run on Google Colab, this is to use a GPU later.
+> Notice that the code is supposed to run on Google Colab, this is in order to use a GPU for creating embeddings.
 
 Once the client is initialized, we can create a collection to store the embeddings. You have to specify the name and the distance metric, also the number of dimensions of the embeddings.
 
@@ -68,7 +70,7 @@ else:
     print("Collection already exists")
 ```
 
-Now, that we have a collection, we can load the dataset and embed the questions just like we did in the previous blog.
+Now that we have a collection, we can load the dataset and embed the questions just like we did in the previous blog.
 
 ```python
 from datasets import load_dataset
@@ -94,7 +96,7 @@ question_embeddings = embed_model.encode(
 ```
 
 Now that the questions are embedded, we can insert them into the Qdrant database. However, unlike the previous blog, this time we
-are trying to minimize the size of the code and the dependencies so that we can reduce the size of the Docker image.
+are trying to minimize the size of the code and the dependencies to reduce the size of the Docker image.
 
 That's why we will save the questions and answers in the database next to the question embeddings.
 This way, we can retrieve the question and the answer together without needing to load the dataset like we did in the previous blog.
@@ -134,13 +136,15 @@ for i in tqdm(range(0, len(questions), batch_size)):
     )
 ```
 
-The `PointStruct` constructs a Qdrant `Point`, the central entity in Qdrant, it represents a single point in the vector space. The "payload" is a dictionary that contains the metadata associated with the point, in our case, it contains the question and the answer, allowing us to retrieve them later.
+The `PointStruct` constructs a Qdrant `Point`, the central entity in Qdrant, it represents a single point in the vector space.
+
+The "payload" is a dictionary that contains the metadata associated with the point, in our case, it contains the question and the answer, allowing us to retrieve them later.
 
 > You can read more about `Points` in the [Qdrant documentation](https://qdrant.tech/documentation/concepts/points/).
 
 This process might take a while, I remember it took around 40 minutes to finish. Also, note that after it finishes, the cluster overview page will show that the RAM and vCPU usage are off the charts, this is normal, the database needs some time to index the data.
 
-After around 15 minutes, you should see a dashboard that looks like this (assuming you are using a dataset of the same size as the one used in the project)
+After around 15 minutes, you should see a dashboard that looks like this (assuming you are using a dataset of the same size as the one used in the project).
 
 ![Qdrant Dashboard](./media/qdrant-overview.png)
 
@@ -165,13 +169,13 @@ The `retrieve_context` function can be used to give GPT-4o-mini the context it n
 
 #### Hugging Face Inference API
 
-The current code needs the `sentence_transformers` library to work, all what it does is loading the `all-MiniLM-L6-v2` model and embedding the user's question.
+The current code needs the `sentence_transformers` library to work, all it does is load the `all-MiniLM-L6-v2` model and embed the user's question.
 
 `sentence_transformers` is a huge library that depends on other libraries as well, installing it increases the size of the Docker image significantly.
 
 > I created a docker image containing `sentence_transformers`, `openai`, and `datasets` libraries, the image size was around 6.1 GB!
 
-We can avoid this quite easily by using the [Hugging Face Inference API](https://huggingface.co/docs/api-inference/index) to embed the user's question.
+We can avoid this easily by using the [Hugging Face Inference API](https://huggingface.co/docs/api-inference/index) to embed the user's question.
 
 On Hugging Face, go to **Settings** > **Access Tokens** and create a new token with the `READ` permission, you can use this key to connect to the Inference API.
 
@@ -191,15 +195,15 @@ def get_embedding(text: str):
     return response.json()
 ```
 
-Now, instead of using the oversized `sentence_transformers`, we can simply call `get_embedding` to embedd the user's question.
+Now, instead of using the oversized `sentence_transformers`, we can simply call `get_embedding` to embed the user's question.
 
 > You can call the Hugging Face API for free, but there are limitations, for a real production app, you should consider using a paid plan.
 
 ## Building the API
 
-In order to use the chatbot, we need to build an API that will handle the requests and responses. We will use FastAPI with uvicorn for this purpose.
+To use the chatbot, we need to build an API that will handle the requests and responses. We will use FastAPI with uvicorn for this purpose.
 
-We have to keep in mind that the API is going to be deployed, so we need to make sure that all the needed packages are installed and that the routing is correct.
+Keep in mind that the API is going to be deployed, so we need to make sure that all the needed packages are installed and that the routing is correct.
 
 First, we need to create an `/api` folder that will contain our API code. Inside the `api` folder, we're going to have an `api_requirements.txt` file, a `/routers` folder, a `/services` folder, and a `main.py` file.
 
@@ -306,9 +310,9 @@ def medical_chatbot(user_query, chat_history=[]):
 
 A few things to note here:
 
-1. `retrieve_context` is the same function we defined earlier, the one retrieving the context using Qdrant and Hugging Face.
-2. The prompt is detailed to make sure that the model doesn't answer questions that are not related to medical topics.
-3. The prompt tells the model to not use any other knowledge, even if it is related, this is important because otherwise the context won't matter at all given the huge knowledge of the model.
+1. `retrieve_context` is the same function we defined earlier, the one retrieving the context using Qdrant and Hugging Face APIs
+2. The prompt is detailed to make sure that the model doesn't answer questions that are not related to medical topics
+3. The prompt tells the model to not use any other knowledge, even if it is related, this is important because otherwise, the context won't matter at all given the huge knowledge of the model
 
 The final component of the API is the `main.py` file, this is where we define the FastAPI app and include the router.
 
@@ -339,11 +343,11 @@ app.include_router(chat.router)
 async def root():
     return {"message": "Welcome to the Medical Chatbot API. Use /docs for API documentation."}
 ```
-The middleware is an important security feature, this app is for learning purposes, this is why `allow_origins` accepts requests from anywhere, but in production, you should restrict the allowed origins to only the ones you trust.
+The middleware is an important security feature, `allow_origins` is set to accept requests from anywhere, this is acceptable only in this case because this is a development environment. But in production, you should restrict the allowed origins to only the ones you trust.
 
 ## Conclusion and Next Steps
 
-We have re-built the RAG chatbot using a vector database, we used Hugging Face embedding API, and we built a backend API using FastAPI.
+We rebuilt the RAG chatbot using a vector database, used Hugging Face embedding API, and built a backend API using FastAPI.
 
 The new design is more scalable and easier to deploy, unlike the previous version, we don't need to load the dataset every time we want to retrieve the context, and we got rid of big libraries like `sentence_transformers`, `datasets`, and `faiss`.
 
