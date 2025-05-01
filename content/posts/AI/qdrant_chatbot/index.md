@@ -14,7 +14,7 @@ In a [previous blog](https://ahmadhamze.github.io/posts/ai/medical_chatbot/), I 
 
 The RAG chatbot was embedding the user's question and retrieving the most relevant answers from an embeddings file, then GPT-4o-mini was used to generate the final answer using the retrieved answers.
 
-In this blog, I will get rid of the embeddings file and use a vector database instead, then deploy the chatbot as an API using Docker and AWS.
+In this blog, I will get rid of the embeddings file and use a vector database instead, also, the code will be repurposed into being smaller in size in order to deploy the chatbot using Docker and AWS.
 
 ### Why Vector Database?
 
@@ -101,7 +101,7 @@ This way, we can retrieve the question and the answer together without needing t
 
 To populate the database, we will make post requests to the Qdrant API, the data will be batched to avoid hitting the API limits.
 
-To insert or update data in Qdrant, we use `upsert` method:
+To insert or update data in Qdrant, we use the `upsert` method
 
 ```python
 from qdrant_client.http import models
@@ -140,7 +140,7 @@ The `PointStruct` constructs a Qdrant `Point`, the central entity in Qdrant, it 
 
 This process might take a while, I remember it took around 40 minutes to finish. Also, note that after it finishes, the cluster overview page will show that the RAM and vCPU usage are off the charts, this is normal, the database needs some time to index the data.
 
-After around 15 minutes, you should see a dashboard that looks like this (assuming you are using a dataset of the same size as the one used in the project):
+After around 15 minutes, you should see a dashboard that looks like this (assuming you are using a dataset of the same size as the one used in the project)
 
 ![Qdrant Dashboard](./media/qdrant-overview.png)
 
@@ -153,7 +153,90 @@ def retrieve_context(query: str) -> str:
         query=embed_model.encode(query),
         limit=3
     )
-    return "\n\n".join([f"Patient: {question}\nDoctor: {answer}" for question, answer in [(point.payload["question"], point.payload["answer"]) for point in nearest.points]])
+    return "\n\n".join([
+        f"Patient: {question}\nDoctor: {answer}"
+        for question, answer in [
+            (point.payload["question"], point.payload["answer"]) for point in nearest.points
+            ]
+        ])
 ```
 
-The `retrieve_context` function will be used to give GPT-4o-mini the context it needs to generate the final answer.
+The `retrieve_context` function can be used to give GPT-4o-mini the context it needs to generate the final answer, but not so fast!
+
+### Hugging Face Inference API
+
+The current code needs the `sentence_transformers` library to work, all what it does is loading the `all-MiniLM-L6-v2` model and embedding the user's question.
+
+`sentence_transformers` is a huge library that depends on other libraries as well, installing it increases the size of the Docker image significantly.
+
+> I created a docker image containing `sentence_transformers`, `openai`, and `datasets` libraries, the image size was around 6.1 GB!
+
+We can avoid this quite easily by using the [Hugging Face Inference API](https://huggingface.co/docs/api-inference/index) to embed the user's question.
+
+On Hugging Face, go to **Settings** > **Access Tokens** and create a new token with the `READ` permission, you can use this key to connect to the Inference API.
+
+```python
+import requests
+
+# HUGGING_FACE_API_KEY is retrieved from the environment variables
+headers = {"Authorization": f"Bearer {HUGGING_FACE_API_KEY}"}
+
+API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+def get_embedding(text: str):
+    response = requests.post(
+        API_URL,
+        headers=headers,
+        json={"inputs": text}
+    )
+    return response.json()
+```
+
+Now, instead of using the oversized `sentence_transformers`, we can simply call `get_embedding` to embedd the user's question.
+
+> You can call the Hugging Face API for free, but there are limitations, for a real production app, you should consider using a paid plan.
+
+## Building the API
+
+In order to use the chatbot, we need to build an API that will handle the requests and responses. We will use FastAPI for this purpose.
+
+We have to keep in mind that the API is going to be deployed, so we need to make sure that all the needed packages are installed and that the routing is correct.
+
+First, we need to create an `/api` folder that will contain our API code. Inside the `api` folder, we're going to have an `api_requirements.txt` file, a `/routers` folder, a `/services` folder, and a `main.py` file.
+
+It is important to create a `__init__.py` file in each folder to make them packages, this is important for the Docker image to work correctly.
+
+In the same directory as `main.py`, I created a `models.py` file that uses `Pydantic` to define the request and response models.
+This allows FastAPI to validate the data and generate the OpenAPI documentation automatically.
+
+```python
+from pydantic import BaseModel
+from typing import List, Dict, Optional
+
+class ChatRequest(BaseModel):
+    query: str
+    chat_history: Optional[List[Dict[str, str]]] = []
+
+class ChatResponse(BaseModel):
+    response: str
+```
+We can use these types to define the post request of the API
+
+```python
+from fastapi import APIRouter, HTTPException
+from models import ChatRequest, ChatResponse
+from services.chatbot import get_chatbot_response
+
+router = APIRouter(
+    prefix="/chat",
+    tags=["chat"],
+    responses={404: {"description": "Not found"}},
+)
+
+@router.post("/", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    try:
+        response = get_chatbot_response(request.query, request.chat_history)
+        return ChatResponse(response=response)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
+```
