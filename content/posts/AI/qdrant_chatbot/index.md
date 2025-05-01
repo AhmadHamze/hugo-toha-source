@@ -163,7 +163,7 @@ def retrieve_context(query: str) -> str:
 
 The `retrieve_context` function can be used to give GPT-4o-mini the context it needs to generate the final answer, but not so fast!
 
-### Hugging Face Inference API
+#### Hugging Face Inference API
 
 The current code needs the `sentence_transformers` library to work, all what it does is loading the `all-MiniLM-L6-v2` model and embedding the user's question.
 
@@ -197,7 +197,7 @@ Now, instead of using the oversized `sentence_transformers`, we can simply call 
 
 ## Building the API
 
-In order to use the chatbot, we need to build an API that will handle the requests and responses. We will use FastAPI for this purpose.
+In order to use the chatbot, we need to build an API that will handle the requests and responses. We will use FastAPI with uvicorn for this purpose.
 
 We have to keep in mind that the API is going to be deployed, so we need to make sure that all the needed packages are installed and that the routing is correct.
 
@@ -219,7 +219,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
 ```
-We can use these types to define the post request of the API
+We can use these types to define the post request of the API (this is defined in the `routers/chat.py` file)
 
 ```python
 from fastapi import APIRouter, HTTPException
@@ -240,3 +240,111 @@ async def chat(request: ChatRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
 ```
+
+This creates a `/chat` endpoint that accepts a POST request with a JSON body containing the user's question and the chat history. The response will be a JSON object containing the generated answer.
+
+The `get_chatbot_response` function is defined in the `services/chatbot.py` file, it's a straightforward function
+
+```python
+from qdrant_chatbot import medical_chatbot
+
+def get_chatbot_response(query: str, chat_history=None):
+    """
+    Process a user query through the medical chatbot
+    
+    Args:
+        query: The user's question
+        chat_history: Optional chat history
+        
+    Returns:
+        The chatbot's response as a string
+    """
+    if chat_history is None:
+        chat_history = []
+        
+    # medical_chatbot is the function that generates the response
+    response = medical_chatbot(query, chat_history)
+    return response
+```
+
+#### The Chatbot
+
+`medical_chatbot` is the function that "answers" the question, this is the same function we used in the previous blog, it takes the user's question and the chat history and returns the generated answer.
+
+I didn't go over it in detail the last time, so let's take a look at it now
+
+```python
+def medical_chatbot(user_query, chat_history=[]):
+    """Uses OpenAI's GPT-4 to generate a response with retrieved context"""
+    retrieved_info = retrieve_context(user_query)
+    # Used for debugging
+    print("Retrieved info:", retrieved_info)
+    prompt = f"""
+    You are a helpful and professional medical chatbot, you only answer questions related to medical topics,
+    if the user asks a question that is not medical, you should let them know that you can only answer medical questions.
+    Below is past conversation data:
+
+    {retrieved_info}
+
+    Now, answer the following question solely based on the context provided above, do not use any other knowledge, even if it is related:
+    {user_query}
+    """
+    response = client_4o.chat.completions.create(
+        model=GPT_4o_MODEL,
+        messages=[
+            {
+                "role": "system", "content": "You are a medical chatbot."
+            },
+            {
+                "role": "user", "content": prompt
+            }
+        ],
+        temperature=0.7
+    )
+    return response.choices[0].message.content
+```
+
+A few things to note here:
+
+1. `retrieve_context` is the same function we defined earlier, the one retrieving the context using Qdrant and Hugging Face.
+2. The prompt is detailed to make sure that the model doesn't answer questions that are not related to medical topics.
+3. The prompt tells the model to not use any other knowledge, even if it is related, this is important because otherwise the context won't matter at all given the huge knowledge of the model.
+
+The final component of the API is the `main.py` file, this is where we define the FastAPI app and include the router.
+
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from routers import chat
+
+app = FastAPI(
+    title="Medical Chatbot API",
+    description="API for a medical chatbot that answers health-related questions",
+    version="1.0.0"
+)
+
+# CORS settings
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include routers
+app.include_router(chat.router)
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Medical Chatbot API. Use /docs for API documentation."}
+```
+The middleware is an important security feature, this app is for learning purposes, this is why `allow_origins` accepts requests from anywhere, but in production, you should restrict the allowed origins to only the ones you trust.
+
+## Conclusion and Next Steps
+
+We have re-built the RAG chatbot using a vector database, we used Hugging Face embedding API, and we built a backend API using FastAPI.
+
+The new design is more scalable and easier to deploy, unlike the previous version, we don't need to load the dataset every time we want to retrieve the context, and we got rid of big libraries like `sentence_transformers`, `datasets`, and `faiss`.
+
+Now, we can containerize the app and deploy it using Docker and AWS, this is what I will cover in the next blog.
