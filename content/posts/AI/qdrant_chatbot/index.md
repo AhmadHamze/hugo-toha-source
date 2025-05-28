@@ -185,7 +185,7 @@ import requests
 # HUGGING_FACE_API_KEY is retrieved from the environment variables
 headers = {"Authorization": f"Bearer {HUGGING_FACE_API_KEY}"}
 
-API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+API_URL = "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2/pipeline/feature-extraction"
 def get_embedding(text: str):
     response = requests.post(
         API_URL,
@@ -196,6 +196,11 @@ def get_embedding(text: str):
 ```
 
 Now, instead of using the oversized `sentence_transformers`, we can simply call `get_embedding` to embed the user's question.
+
+> Just after I finished writing this blog, the url for the `all-MiniLM-L6-v2` model changed, the app broke and even though I
+> figured out quickly that the url was broken, it took me a while to find the new url.
+> I had to ask a question on Hugging Face discord page, and someone pointed me to the location of the new url.
+> This might be a proof that using a url might not be a good idea! You may want to use the model directly despite its size after all.
 
 > You can call the Hugging Face API for free, but there are limitations, for a real production app, you should consider using a paid plan.
 
