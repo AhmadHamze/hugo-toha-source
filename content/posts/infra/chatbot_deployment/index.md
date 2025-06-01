@@ -1,6 +1,6 @@
 ---
-title: "RAG Chatbot: Deployment"
-date: 2025-05-28
+title: "RAG Chatbot: AWS Deployment"
+date: 2025-06-01
 description: Deploying a RAG chatbot with AWS ECS Fargate
 menu:
   sidebar:

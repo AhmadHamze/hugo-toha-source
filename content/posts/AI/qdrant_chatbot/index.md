@@ -356,4 +356,4 @@ We rebuilt the RAG chatbot using a vector database, used Hugging Face embedding 
 
 The new design is more scalable and easier to deploy, unlike the previous version, we don't need to load the dataset every time we want to retrieve the context, and we got rid of big libraries like `sentence_transformers`, `datasets`, and `faiss`.
 
-Now, we can containerize the app and deploy it using Docker and AWS, this is what I will cover in the next blog.
+Now, we can containerize the app and deploy it using Docker and AWS, please continue reading [here](https://ahmadhamze.github.io/posts/infra/chatbot_deployment/).
