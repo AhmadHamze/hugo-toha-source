@@ -22,7 +22,7 @@ Developers and testers can use the staging environment to test the application b
 
 ## Deployment friendly code
 
-The first step is to make sure that the code can run correctly wherever it is deployed. In our case, we have a chatbot that is using multiple API keys to connect to different services. We need to ensure that these keys are available in the environment where the code is running.
+The first step is to make sure that the code can run correctly wherever it is deployed. In our case, we have a chatbot that uses multiple API keys to connect to different services. We need to ensure that these keys are available in the environment where the code is running.
 
 One way to do so is by using environment variables, we already have a `.env` file that contains the API keys, however, this is not the best way to store secrets in production.
 
@@ -39,7 +39,7 @@ Then, name your secret, e.g. `qdrant-medical-chatbot-secrets`, and select the en
 
 Now that the secret is stored, we can use it in our code, to do so, we need to change the code from using the `.env` file to using the AWS Secrets Manager.
 
-This is why we need to use the `boto3` library, this is a Python library that allows interacting with AWS services, including Secrets Manager.
+This is why we need to use the `boto3` library, this is a Python library that allows interaction with AWS services, including Secrets Manager.
 We will use the `get_secret_value` method to retrieve the secret value, and then we will load it into variables.
 
 ```python
@@ -109,7 +109,7 @@ A few things to note here:
 2. The `WORKDIR` command sets the working directory inside the container, this is where the code will be copied to and where the application will run.
 3. The `CMD` command specifies the command to run the application, here we run the FastAPI application using `uvicorn`. We also specify what file and function to run (`main:app`), this is very important to get right, otherwise the application will not start.
 
-> In order to not copy useless files into the Docker image, you can create a `.dockerignore` file in the root of the application, similar to `.gitignore`, and add files and directories that should not be copied into the image, such as `*.pyc`, `__pycache__`, `.env`, etc.
+> To not copy useless files into the Docker image, you can create a `.dockerignore` file in the root of the application, similar to `.gitignore`, and add files and directories that should not be copied into the image, such as `*.pyc`, `__pycache__`, `.env`, etc.
 
 One simple way to test the Docker image is to build it and run it locally, you can do so by using docker commands like `docker build` and `docker run`.
 However, there is a much more suitable way to test the Docker image, given that we have some AWS services to use, that is using `docker compose`.
@@ -146,7 +146,7 @@ Under `environment`, we pass the AWS credentials to the container, this is neede
 
 Now, you can run the application using `docker compose up` from the root of the application, this will build the Docker image and run the application in a container.
 
-One of the many benifits of dokcer compose is that when you change the code in the `src/api` directory, the changes will be reflected in the container, this is because we mounted the `src/api` directory as a volume in the container.
+One of the many benefits `docker compose` is that when you change the code in the `src/api` directory, the changes will be reflected in the container, this is because we mounted the `src/api` directory as a volume in the container.
 
 > This does not mean that the code in the container is changed! When you want to run the container directly, you will have to rebuild the image using `docker build` command. 
 
@@ -187,49 +187,49 @@ Before we create the service, we need to create a "task definition". A task defi
 > It is important to get this part right, otherwise, you will get errors later when you try to run the service.
 > The most important part is specifying the permissions needed for the task to run.
 
-Here are the steps to create a task definition (this is a form like page on AWS):
+Here are the steps to create a task definition (this is a form-like page on AWS):
 
 ![Task definitions](./media/task_definitions.png)
 
-1. Go to **ECS > Task definitions** and create a new task definition
-2. Select the **Fargate** launch type
-3. In the task definition settings, give it a name (keep a -task suffix as a best practice)
+1. Go to **ECS > Task definitions** and create a new task definition.
+2. Select the **Fargate** launch type.
+3. In the task definition settings, give it a name (keep a -task suffix as a best practice).
 4. In **Task Execution Role**, you must give permission to the task so that it is able to run, attach `ecsTaskExecutionRole`
-5. In **Task Role**, you must specify some permissions to allow ECS to interact with the Docker container, this includes `CloudWatchLogsFullAccess`,  `AmazonEC2ContainerRegistryReadOnly`, and in case you're using AWS Secrets Manager, `SecretsManagerReadWrite`. Note that you have to create the rule that will be assigned in **Task role** yourself, you can do so from IAM > Roles
-6. Add a container to the task definition, give it a name, specify the Docker image and the port mappings (e.g. 8000:8000)
-7. Add the secrets under **Environment > Secrets**
-8. Click "Add" then "Create" to create the task definition
+5. In **Task Role**, you must specify some permissions to allow ECS to interact with the Docker container, this includes `CloudWatchLogsFullAccess`,  `AmazonEC2ContainerRegistryReadOnly`, and in case you're using AWS Secrets Manager, `SecretsManagerReadWrite`. Note that you have to create the rule that will be assigned in **Task role** yourself, you can do so from IAM > Roles.
+6. Add a container to the task definition, give it a name, and specify the Docker image and the port mappings (e.g. 8000:8000).
+7. Add the secrets under **Environment > Secrets**.
+8. Click "Add" then "Create" to create the task definition.
 
 #### ECS Service
 
 Here are the steps for creating the ECS service:
 
-1. Go to ECS > Clusters and create a new cluster, select the **Networking only** option, and give it a name, (keep a -cluster suffix to avoid confusion with the service name)
-2. For VPC/Subnets, select or let AWS create a new VPC
+1. Go to ECS > Clusters and create a new cluster, select the **Networking only** option, and give it a name, (keep a -cluster suffix to avoid confusion with the service name).
+2. For VPC/Subnets, select or let AWS create a new VPC.
 3. Inside the cluster, go to **Services > Create**, you have to configure the service:
-   1. Launch type: **Fargate**
-   2. Task Definition: select the task definition you created earlier
-   3. Cluster: select the cluster you created earlier
-   4. Service name: give it a name (keep a -service suffix to avoid confusion with the cluster name)
-   5. Number of tasks: set it to 1
-   6. Netowrking: select subnets and assign a security group, you have to check the box for **Auto assign public IP** if you want to access the service from the internet
-   7. Load balancer: this is needed for production, you can skip it, I will cover it in a future blog
-4. Click "Next" and review the settings, then click "Create Service"
+   1. Launch type: **Fargate**.
+   2. Task Definition: select the task definition you created earlier.
+   3. Cluster: select the cluster you created earlier.
+   4. Service name: give it a name (keep a -service suffix to avoid confusion with the cluster name).
+   5. Number of tasks: set it to 1.
+   6. Netowrking: select subnets and assign a security group, you have to check the box for **Auto assign public IP** if you want to access the service from the internet.
+   7. Load balancer: this is needed for production, you can skip it, I will cover it in a future blog.
+4. Click "Next" and review the settings, then click "Create Service".
 
 #### Traffic to ports
 
 Now, you should have a running service! Congratulations! However, if you try to access the service using the public IP address, you will not get anything, bummer!
 
-This is because the service is not configured to allow traffic to the port 8000, you need to add a rule to the security group that allows traffic to this port.
+This is because the service is not configured to allow traffic to port 8000, you need to add a rule to the security group that allows traffic to this port.
 
-1. Got to **EC2 > Security Groups** and find the security group that was created for the ECS service
-2. Click on the security group and go to the **Inbound rules** tab
+1. Go to **EC2 > Security Groups** and find the security group that was created for the ECS service.
+2. Click on the security group and go to the **Inbound rules** tab.
 3. Click on **Edit inbound rules** and add a new rule:
    - Type: **Custom TCP**
    - Protocol: **TCP**
    - Port Range: **8000** (or other port if you specified a different one in the task definition)
    - Source: **0.0.0.0/0** (or your IP address if you want to restrict access)
-4. Click **Save rules**
+4. Click **Save rules**.
 
 Now, you should be able to access the service using the public IP address of the ECS service, e.g. `http://<public-ip>:8000/`.
 You can find this public-ip address in the ECS service details page, under the **Tasks** tab, click on the task ID, and you will see the public IP address in the task details.
@@ -249,8 +249,8 @@ You should get an answer from the chatbot, if that's the case, congratulations! 
 A few things to note here:
 - The service might take a few minutes to start, so be patient
 - If you want to turn off the task, you have to click on **Update service** and set the number of tasks to 0, this will stop the task and you will not be charged for it. Stopping the task manually will trigger a new task to start! So, make sure to set the number of tasks to 0
-- Once you stop the task, the public IP address will change when you create a new one, so you will have to update the curl command with the new IP address (this is why it is better to use a load balancer which gives a stable url to use)
-- The running task is what costs the most, in my case, 9 days of constant running costed me around 15$
+- Once you stop the task, the public IP address will change when you create a new one, so you will have to update the curl command with the new IP address (this is why it is better to use a load balancer that gives a stable URL to use)
+- The running task is what costs the most, in my case, 9 days of constant running cost me around 15$
 - The service itself is not expensive, less than a dollar a month
 - The secrets manager is also cheap, I ended up paying 0.1$ a month
   
@@ -259,8 +259,8 @@ A few things to note here:
 
 In this blog, we learned how to deploy a RAG chatbot on AWS ECS Fargate using Docker. We covered the steps to make the code deployment-friendly, create a Docker image, push it to AWS ECR, and finally deploy it on ECS Fargate.
 
-I found doing this quite hard, I couldn't do it without LLMs, I had to ask for help from multiple models and figuring stuff on my own when the LLMs were not able to help me.
+I found doing this quite hard, I couldn't do it without LLMs, I had to ask for help from multiple models and figure stuff on my own when the LLMs were not able to help me.
 This will probably be challenging for you as well if this domain is new to you, I hope this blog can help.
 
 In the next blog, I will cover how to set up a load balancer for the service, this will allow you to access the service using a stable URL and it will also allow you to scale the service if needed.
-I will be also improving the chatbot and deploying a simple UI on a different service, so stay tuned!
+I will also improve the chatbot and deploy a simple UI on a different service, so stay tuned!
