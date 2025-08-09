@@ -212,7 +212,7 @@ Here are the steps for creating the ECS service:
    3. Cluster: select the cluster you created earlier.
    4. Service name: give it a name (keep a -service suffix to avoid confusion with the cluster name).
    5. Number of tasks: set it to 1.
-   6. Netowrking: select subnets and assign a security group, you have to check the box for **Auto assign public IP** if you want to access the service from the internet.
+   6. Networking: select subnets and assign a security group, you have to check the box for **Auto assign public IP** if you want to access the service from the internet.
    7. Load balancer: this is needed for production, you can skip it, I will cover it in a future blog.
 4. Click "Next" and review the settings, then click "Create Service".
 
